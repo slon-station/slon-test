@@ -3,7 +3,7 @@
   id: GoalCommTowerFinished
   name: communication tower
   suffix: finished
-  description: A large structure, used to shield the station from outer signals.
+  description: A large structure, used to shield the station from outer signals, and generate points.
   components:
   - type: Sprite
     sprite: _Slon/Objects/Goals/comm_tower2.rsi
@@ -27,6 +27,17 @@
   - type: Construction
     node: commtower10
     graph: CommTower
+  - type: ActivatableUI
+    key: enum.ResearchClientUiKey.Key
+  - type: ActivatableUIRequiresPower
+  - type: UserInterface
+    interfaces:
+      enum.ResearchClientUiKey.Key:
+        type: ResearchClientBoundUserInterface
+  - type: ResearchClient
+  - type: ResearchPointSource
+    pointspersecond: 7
+    active: true
 
 - type: entity
   parent: [ BaseMachinePowered, ConstructibleMachine ]
