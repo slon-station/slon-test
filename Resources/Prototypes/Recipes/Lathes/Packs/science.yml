@@ -107,6 +107,7 @@
   - APECircuitboard
   - ArtifactAnalyzerMachineCircuitboard
   - ArtifactCrusherMachineCircuitboard
+  - GoalCommunicationShieldCircuitBoard # slon
 
 - type: latheRecipePack
   id: CameraBoards
