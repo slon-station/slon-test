@@ -1,5 +1,5 @@
 - type: entity
-  parent: BaseStructure
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
   id: GoalCommTowerFinished
   name: communication tower
   suffix: finished
@@ -29,7 +29,7 @@
     graph: CommTower
 
 - type: entity
-  parent: BaseStructure
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
   id: CommTowerBase
   name: communication tower shield
   description: It appears to lack some crucial parts... Maybe try to add steel?
