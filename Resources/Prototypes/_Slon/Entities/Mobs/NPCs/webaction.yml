@@ -2,7 +2,7 @@
   parent: BaseAction
   id: ActionWebPassage
   name: Web passage
-  description: Spawns a web-passable tile only spiders can cross.
+  description: Make a web-passable tile only spiders can cross.
   components:
   - type: Action
     icon: { sprite: _Slon/Objects/Fun/SpecialSpiders/specialweb.rsi, state: webpassage }

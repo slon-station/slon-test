@@ -8,7 +8,7 @@
   },
   "states": [
     {
-      "name": "maint_spider",
+      "name": "spider",
       "directions": 4,
       "delays": [
         [
@@ -34,7 +34,7 @@
       ]
     },
     {
-      "name": "maint_spider_dead"
+      "name": "dead"
     }
   ]
 }

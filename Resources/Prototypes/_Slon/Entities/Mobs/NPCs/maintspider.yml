@@ -16,15 +16,20 @@
       settings: short
   - type: GhostTakeoverAvailable
   - type: Sprite
-    sprite: _Slon/Objects/Fun/SpecialSpiders/maintspider.rsi
-    state: maint_spider
+    drawdepth: SmallMobs
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spider
+      sprite: _Slon/Objects/Fun/SpecialSpiders/maintspider.rsi
   - type: DamageStateVisuals
     rotate: true
     states:
       Alive:
-        Base: maint_spider
+        Base: spider
+      Critical:
+        Base: dead
       Dead:
-        Base: maint_spider_dead
+        Base: dead
   - type: Fixtures
     fixtures:
       fix1:
@@ -76,6 +81,7 @@
       Dead: 0
     baseDecayRate: -0.1 # i dont want it to be like a ratking, the only purpose of these spiders is to make maints more unsafe
   - type: WebPassageAction
+  - type: Appearance
 
 - type: entity
   id: MobMaintSpiderling
@@ -92,8 +98,11 @@
     states:
       Alive:
         Base: spiderling
+      Critical:
+        Base: dead
       Dead:
-        Base: spiderling_dead
+        Base: dead
+  - type: Appearance
   - type: Fixtures
     fixtures:
       fix1:
@@ -104,8 +113,11 @@
         mask:
           - MidImpassable
   - type: Sprite
-    sprite: _Slon/Objects/Fun/SpecialSpiders/maintspiderling.rsi
-    state: spiderling
+    drawdepth: SmallMobs
+    layers:
+    - map: [ "enum.DamageStateVisualLayers.Base" ]
+      state: spiderling
+      sprite: _Slon/Objects/Fun/SpecialSpiders/maintspiderling.rsi
   - type: Tag
     tags: # removed bumdoor opener
     - FootstepSound
