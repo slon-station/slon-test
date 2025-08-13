@@ -17,6 +17,7 @@ namespace Content.Goobstation.Shared._Slon.Spider
         public string WebAction = "ActionWebPassage";
 
         [DataField] public EntityUid? Action;
+        [DataField] public float DoAfter { get; set; } = 10f;
     }
 
     [Serializable]

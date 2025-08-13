@@ -19,7 +19,7 @@ public sealed class WebPassageActionSystem : SharedWebPassageActionSystem
     private void OnAction(EntityUid uid, WebPassageActionComponent comp, WebPassageActionEvent args)
     {
         var ev = new WebPassageDoAfterEvent();
-        var doAfterArgs = new DoAfterArgs(EntityManager, uid, TimeSpan.FromSeconds(3), ev, uid)
+        var doAfterArgs = new DoAfterArgs(EntityManager, uid, TimeSpan.FromSeconds(comp.DoAfter), ev, uid)
         {
             BreakOnMove = true,
             BreakOnDamage = true

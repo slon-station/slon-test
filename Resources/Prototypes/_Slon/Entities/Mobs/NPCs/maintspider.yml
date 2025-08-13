@@ -53,7 +53,7 @@
       melee:
         reagents:
         - ReagentId: ChloralHydrate # to compensate for the low damage
-          Quantity: 20
+          Quantity: 50 # 5u, the space spider value halved
   - type: LanguageKnowledge # Einstein Engines - Language
     speaks:
     - Xeno
@@ -63,16 +63,16 @@
   - type: EggLayer
     eggSpawn:
     - id: EggMaintSpiderFertilized
-    hungerUsage: 51
+    hungerUsage: 20
     eggLayAction: MouseMultiply
     hungerRequired: true
   - type: Hunger
-    startingHunger: 50
+    startingHunger: 19
     thresholds:
-      Overfed: 110
-      Okay: 80
-      Peckish: 50
-      Starving: 19
+      Overfed: 80
+      Okay: 60
+      Peckish: 30
+      Starving: 1
       Dead: 0
     baseDecayRate: -0.1 # i dont want it to be like a ratking, the only purpose of these spiders is to make maints more unsafe
   - type: WebPassageAction
@@ -100,11 +100,9 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.2
-        density: 100
+        density: 100 # cant walk under the tables or airlocks because ingame they would run away constantly
         mask:
-        - SmallMobMask
-        layer:
-        - SmallMobLayer
+          - MidImpassable
   - type: Sprite
     sprite: _Slon/Objects/Fun/SpecialSpiders/maintspiderling.rsi
     state: spiderling

@@ -5,7 +5,6 @@
   description: Spawns a web-passable tile only spiders can cross.
   components:
   - type: Action
-    icon: Interface/Actions/web.png
-    useDelay: 25
+    icon: { sprite: _Slon/Objects/Fun/SpecialSpiders/specialweb.rsi, state: webpassage }
   - type: InstantAction
     event: !type:WebPassageActionEvent
