@@ -2921,6 +2921,11 @@
     color: "#808080"
     activateSound: null
     deactivateSound: null
+  - type: CollectiveMind # Slon - collective mind
+    defaultChannel: Spidermind
+    respectAccents: true
+    channels:
+    - Spidermind
 
 - type: entity
   parent: MobSpiderBase
