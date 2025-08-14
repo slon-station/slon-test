@@ -130,7 +130,7 @@
     damage:
       types:
         Piercing: 3
-  - type: TimedDespawn # it wouldve been peak to make a normal logic for this, but me lazy
+  - type: TimedDespawn # it wouldve been peak to make a normal logic for this, but there is no "TriggerOnTime" or something
     lifetime: 150
   - type: SpawnOnDespawn # also one of the reasons why it isnt a ghostrole, it wipes mind
     prototype: MobMaintSpider
