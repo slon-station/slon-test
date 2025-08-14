@@ -53,7 +53,7 @@
   id: MaintenanceSpiderSpawn
   components:
   - type: GameRule
-    chaosScore: 75 # less than the tarantula spawn because they are friendly BY DEFAULT
+    chaosScore: 75 # less than the tarantula spawn because it spawns only 1 spider instead of a ton of tarantulas.
   - type: StationEvent
     weight: 2
     startAnnouncement: station-event-vent-creatures-start-announcement

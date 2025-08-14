@@ -2923,7 +2923,7 @@
     color: "#808080"
     activateSound: null
     deactivateSound: null
-  - type: CollectiveMind # Slon - collective mind
+  - type: CollectiveMind # Slon
     defaultChannel: Spidermind
     respectAccents: true
     channels:
@@ -3577,7 +3577,7 @@
     factions:
     - Syndicate
   - type: Access
-    tags: 
+    tags:
     - NuclearOperative
     - SyndicateAgent
   - type: MeleeWeapon
