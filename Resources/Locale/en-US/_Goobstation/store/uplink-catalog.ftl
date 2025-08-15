@@ -226,6 +226,13 @@ uplink-mech-teleporter-heavy-desc = Contains a heavily armored Cybersun mech wit
 uplink-mech-teleporter-assault-name = Assault Mech teleporter
 uplink-mech-teleporter-assault-desc = Contains a lightly armored Cybersun mech with an integrated chainsword, LBX AC 10 "Scattershot", SRM-8 Light Missile Rack and P-X Tesla Cannon.
 
+# Allies
+
+uplink-medborg-name = Syndicate Medical Cyborg
+uplink-medborg-desc = An advanced medical cyborg, capable of keeping the team alive. Comes with an avanced syndicate medical module, syndicate modules, tools, and a fire extinguisher.
+
+uplink-reinforcement-radio-cyborg-saboteur-name = Syndicate Saboteur Cyborg
+uplink-reinforcement-radio-cyborg-saboteur-desc = A stealthy saboteur cyborg disguised as an innocent engineering model. Perfect for infiltration, sabotage, and subtle destruction—until it's time to strike.
 # Chemicals
 
 uplink-lollypop-bundle-name = Donk Co. Lollypop Box
@@ -322,6 +329,9 @@ uplink-undetermined-bundle-desc = This crate comes with three random bundles and
 
 uplink-energy-pickaxe-name = Energy Pickaxe
 uplink-energy-pickaxe-desc = A holographic mining tool with blades comprised of hard light that also serves a deadly melee weapon. Rock and stone!
+
+uplink-tcminer-name = Telecrystal miner
+uplink-tcminer-desc = Contains a flatpack with telecrystal miner, A very loud machine that uses bluespace blockchain technology to generate telecrystals every 10 seconds when powered. Requires 10kW of energy and a connection to the primary station's grid. Multitool not included.
 
 uplink-bloodred-casette-name = Bloodred Casette Player
 uplink-bloodred-casette-desc = Provided by the most egotistical fashion designers of Cybersun, a portable music player!
