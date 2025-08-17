@@ -1,0 +1,17 @@
+- type: entity
+  id: MobSpirateErt
+  suffix: admeme
+  parent: MobSpirate
+  components:
+  - type: Loadout
+    prototypes: [ ERTLeaderGear ]
+    roleLoadout: [ RoleSurvivalExtended ]
+
+- type: entity
+  id: MobSpirateDeathSquad
+  suffix: admeme
+  parent: MobSpirate
+  components:
+  - type: Loadout
+    prototypes: [ DeathSquadGear ]
+    roleLoadout: [ RoleSurvivalEVA ]
