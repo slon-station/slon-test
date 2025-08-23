@@ -502,7 +502,6 @@
   - type: ExaminableCharacter # WWDP
   - type: Sprinter # Goobstation
     canSprint: false # Slon :trollface:
-  - type: SprintingAffectedByScale # Goobstation: port EE height/width sliders
 
 - type: entity
   save: false
