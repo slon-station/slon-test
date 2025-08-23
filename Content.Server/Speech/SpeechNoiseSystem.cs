@@ -91,7 +91,8 @@ namespace Content.Server.Speech
         {
             if (component.SpeechSounds == null
                 || _cfg.GetCVar(CorvaxVars.BarksEnabled) // Corvax-Frontier-Barks-Edit-My-Family-Is
-                && HasComp<SpeechSynthesisComponent>(uid)) // Being-Held-Hostage-For-Me-To-Comment-This
+                && HasComp<SpeechSynthesisComponent>(uid) // Being-Held-Hostage-For-Me-To-Comment-This
+                || !args.Language.SpeechOverride.RequireSpeech) // No noises for non-speech languages.
                 return;
 
             var currentTime = _gameTiming.CurTime;
