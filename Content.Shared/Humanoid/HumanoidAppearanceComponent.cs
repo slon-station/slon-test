@@ -2,9 +2,7 @@
 // SPDX-FileCopyrightText: 2023 Leon Friedrich <60421075+ElectroJr@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2023 csqrb <56765288+CaptainSqrBeard@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 Ed <96445749+TheShuEd@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
 // SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Zekins <zekins3366@gmail.com>
@@ -134,22 +132,6 @@ public sealed partial class HumanoidAppearanceComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public bool ProfileLoaded;
-
-    // begin Goobstation: port EE height/width sliders
-
-    /// <summary>
-    ///     The height of this humanoid.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float Height = 1f;
-
-    /// <summary>
-    ///     The width of this humanoid.
-    /// </summary>
-    [DataField, AutoNetworkedField]
-    public float Width = 1f;
-
-    // end Goobstation: port EE height/width sliders
 }
 
 [DataDefinition]
