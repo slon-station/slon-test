@@ -462,7 +462,7 @@
     wieldToggle: false
   - type: ItemToggleColor
   - type: Appearance
-  - type: ToggleableLightVisuals
+  - type: ToggleableVisuals
     spriteLayer: Firemode
     inhandVisuals:
       left:
