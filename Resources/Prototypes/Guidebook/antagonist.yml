@@ -32,7 +32,7 @@
   text: "/ServerInfo/Guidebook/Antagonist/Antagonists.xml"
   children:
   - Traitors
-  # - CorporateAgents # Goobstation - Corporate Agents # Slon - fuck no
+  - CorporateAgents # Goobstation - Corporate Agents
   - Changelings # Goobstation - changelings
   - Heretics # Goobstation - heretics
   - Blob # Goobstation - Blob
@@ -47,7 +47,9 @@
   - Abductors # Shitmed - Abductors
   - Bingle # Goob content
   - Devil # Goob content
-  - Gang # Goida
+  - Shadowlings # Einstein Engines - Shadowlings
+  - SlaughterDemon # Goob content
+  - Xenomorphs # WD - Xenomorphs
 
 - type: guideEntry
   id: Traitors

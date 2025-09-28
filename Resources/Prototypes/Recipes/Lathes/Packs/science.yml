@@ -48,13 +48,15 @@
   #- SignallerAdvanced - Goobstation - Removed from there. Still in Equipment.
   - DeviceQuantumSpinInverter
   - DeviceDesynchronizer
+  - ClothingBackpackHarmpack
 
 - type: latheRecipePack
   id: ScienceClothing
   recipes:
   - ClothingShoesBootsMagSci
   - ClothingShoesBootsMoon
-  - ClothingShoesBootsSpeed # - Goobstation - Nuked due to sprinting. # Slon - nah
+#  - ClothingShoesBootsSpeed - Goobstation - Nuked due to sprinting.
+  - ClothingShoesBootsJump
   - ClothingBackpackHolding
   - ClothingBackpackSatchelHolding
   - ClothingBackpackDuffelHolding
