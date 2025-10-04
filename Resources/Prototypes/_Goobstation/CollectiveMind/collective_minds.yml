@@ -76,8 +76,14 @@
   keycode: 'w'
   color: "#386a9b"
 
-- type: collectiveMind # slon
-  id: Spidermind
-  name: collective-mind-spider
-  keycode: 'i'
-  color: "#8C8C8C"
+- type: collectiveMind
+  id: Shadowmind
+  name: collective-mind-shadow-mind
+  keycode: 'q'
+  color: "#77698d"
+
+- type: collectiveMind
+  id: Xenomorphivemind
+  name: collective-mind-xeno
+  keycode: 'z'
+  color: "#8c3986"
