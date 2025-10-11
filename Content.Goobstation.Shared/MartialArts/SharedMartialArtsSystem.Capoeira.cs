@@ -2,7 +2,6 @@
 // SPDX-FileCopyrightText: 2025 Aviu00 <aviu00@protonmail.com>
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 // SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
 // SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
@@ -84,7 +83,7 @@ public abstract partial class SharedMartialArtsSystem
 
         _status.TryRemoveStatusEffect(ent, "KnockedDown");
         _standingState.Stand(ent);
-        //_stamina.TryTakeStamina(ent, args.StaminaToHeal);
+        _stamina.TryTakeStamina(ent, args.StaminaToHeal);
         ent.Comp.LastAttacks.Clear();
     }
 
@@ -233,7 +232,7 @@ public abstract partial class SharedMartialArtsSystem
         if (ev.MinVelocity <= velocity)
         {
             power = GetCapoeiraPower(ev, velocity);
-            //_stamina.TryTakeStamina(uid, ev.StaminaToHeal);
+            _stamina.TryTakeStamina(uid, ev.StaminaToHeal);
             return true;
         }
 

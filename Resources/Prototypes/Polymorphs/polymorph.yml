@@ -181,17 +181,6 @@
     inventory: Drop
     cooldown: 160
 
-- type: polymorph
-  id: SmartCorgiMorph
-  configuration:
-    entity: MobCorgiSmart
-    forced: false
-    inventory: Drop
-    transferName: true
-    revertOnCrit: false
-    revertOnDeath: false
-    allowRepeatedMorphs: false
-
 # this is the monkey polymorph for artifact.
 - type: polymorph
   id: ArtifactMonkey
@@ -223,6 +212,7 @@
     entity: MobLizard
     forced: true
     transferName: true
+    transferHumanoidAppearance: true
     inventory: None
     revertOnDeath: true
     revertOnCrit: true
@@ -234,6 +224,7 @@
     entity: MobLuminousPerson
     forced: true
     transferName: true
+    transferHumanoidAppearance: true
     inventory: None
     revertOnDeath: true
     revertOnCrit: true
@@ -295,14 +286,3 @@
     exitPolymorphSound: /Audio/Magic/ethereal_exit.ogg
     duration: 120
     effectProto: EffectDesynchronizer
-
-- type: polymorph
-  id: HellGooseMorph
-  configuration:
-    entity: MobHellGoose
-    forced: true
-    inventory: None
-    transferName: false
-    transferDamage: false
-    revertOnCrit: false
-    revertOnDeath: false

@@ -14,39 +14,14 @@
 # SPDX-FileCopyrightText: 2025 PunishedJoe <PunishedJoeseph@proton.me>
 # SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
 # SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 floatingfeeling <karaadastra@gmail.com>
 # SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-## Parent File to easily add more attributes, here it's used for plasmaman mostly
-- type: entity
-  parent: ClothingOuterBase
-  id: ClothingOuterModsuitBase
-  categories: [ HideSpawnMenu ]
-  components:
-  - type: Appearance
-  - type: AllowSuitStorage
-  - type: Sprite
-    sprite: _Goobstation/Clothing/OuterClothing/Modsuits/standard.rsi
-    layers:
-    - state: chestplate
-    - state: chestplate-sealed
-      visible: false
-      map: [ "sealed" ]
-  - type: Tag
-    tags:
-    - PlasmamanSafe
-  - type: IgniteFromGasImmunity
-    parts:
-    - BodyMiddle
-    - Legs
-
-
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateStandard
-  name: standard modsuit chestplate
+  name: standard hardsuit chestplate
   description: A special modular suit spaceproof cover designed for compact folding inside modular suit control.
   categories: [ HideSpawnMenu ]
   components:
@@ -111,11 +86,14 @@
       heatingCoefficient: 0.01
   - type: FireProtection
     reduction: 0.5
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
 
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateSecurity
-  name: soldat modsuit chestplate
+  name: soldat hardsuit chestplate
   description: A robust modular suit cover with ceramic inserts for extra protection.
   categories: [ HideSpawnMenu ]
   components:
@@ -185,12 +163,15 @@
       heatingCoefficient: 0.01
   - type: FireProtection
     reduction: 0.5
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
 
 
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateHeadOfSecurity
-  name: bulwark modsuit chestplate
+  name: bulwark hardsuit chestplate
   description: A robust modular suit cover with EXTRA ceramic inserts for slightly more protection.
   categories: [ HideSpawnMenu ]
   components:
@@ -267,11 +248,14 @@
       Bicaridine: 10
       TranexamicAcid: 5
       Tramadol: 5
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
 
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateParamedic
-  name: sanitater modsuit chestplate
+  name: sanitater hardsuit chestplate
   description: A white and blue-ish-grey steel plate for keeping out the harsh void of space and the occasional bullet.
   categories: [ HideSpawnMenu ]
   components:
@@ -342,11 +326,14 @@
     damageCoefficient: 0.9
   - type: FireProtection
     reduction: 0.5
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
 
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateEngineer
-  name: sapper modsuit chestplate
+  name: sapper hardsuit chestplate
   description: A tough armor plate to defend against harsh atmospheric conditions and shockwaves.
   categories: [ HideSpawnMenu ]
   components:
@@ -418,11 +405,14 @@
     damageCoefficient: 0.9
   - type: FireProtection
     reduction: 0.7
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
 
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateAtmostech
-  name: aeolus modsuit chestplate
+  name: aeolus hardsuit chestplate
   description: A fire-proof armor plate to defend against harsh atmospheric conditions.
   categories: [ HideSpawnMenu ]
   components:
@@ -492,11 +482,14 @@
     damageCoefficient: 0.9
   - type: FireProtection
     reduction: 0.75
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
 
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateResearchDirector
-  name: minerva modsuit chestplate
+  name: minerva hardsuit chestplate
   description: A bulky bomb and bat proof chunk of steel.
   categories: [ HideSpawnMenu ]
   components:
@@ -568,12 +561,15 @@
     damageCoefficient: 0.5
   - type: FireProtection
     reduction: 0.5
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit
   - type: GroupExamine
 
 - type: entity
   parent: ClothingOuterBase
   id: ClothingModsuitChestplateCaptain
-  name: magnate modsuit chestplate
+  name: magnate hardsuit chestplate
   description: This shit is made out of DIAMONDS, man, this armor was forged with GEMS.
   categories: [ HideSpawnMenu ]
   components:
@@ -645,3 +641,6 @@
     damageCoefficient: 0.6
   - type: FireProtection
     reduction: 0.5
+  - type: HideClothingLayerClothing
+    hiddenSlots:
+    - jumpsuit

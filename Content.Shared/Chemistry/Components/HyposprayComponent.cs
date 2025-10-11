@@ -13,29 +13,16 @@ using Robust.Shared.Audio;
 
 namespace Content.Shared.Chemistry.Components;
 
-/// <summary>
-///     Component that allows an entity instantly transfer liquids by interacting with objects that have solutions.
-/// </summary>
-[RegisterComponent, NetworkedComponent]
-[AutoGenerateComponentState]
+[RegisterComponent, NetworkedComponent, AutoGenerateComponentState]
 public sealed partial class HyposprayComponent : Component
 {
-    /// <summary>
-    ///     Solution that will be used by hypospray for injections.
-    /// </summary>
     [DataField]
     public string SolutionName = "hypospray";
 
-    /// <summary>
-    ///     Amount of the units that will be transfered.
-    /// </summary>
-    [AutoNetworkedField]
     [DataField]
+    [ViewVariables(VVAccess.ReadWrite)]
     public FixedPoint2 TransferAmount = FixedPoint2.New(5);
 
-    /// <summary>
-    ///     Sound that will be played when injecting.
-    /// </summary>
     [DataField]
     public SoundSpecifier InjectSound = new SoundPathSpecifier("/Audio/Items/hypospray.ogg");
 

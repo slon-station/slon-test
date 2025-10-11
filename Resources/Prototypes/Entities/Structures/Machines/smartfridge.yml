@@ -19,11 +19,8 @@
   categories: [ HideSpawnMenu ] # DeltaV - apparently we can't migrate abstract/disabled prototypes
   components:
   - type: StationAiWhitelist
-  - type: Vocalizer
-    hideChat: true
-  - type: VocalizerRequiresPower
-  - type: DatasetVocalizer
-    dataset: SmartFridgeAds
+  - type: Advertise
+    pack: SmartFridgeAds
   - type: Speech
   - type: Appearance
   - type: Sprite
@@ -81,15 +78,6 @@
   - type: InteractionOutline
   - type: Destructible
     thresholds:
-    - trigger: # Excess damage, don't spawn entities
-        !type:DamageTrigger
-        damage: 300
-      behaviors:
-      - !type:PlaySoundBehavior
-        sound:
-          collection: MetalBreak
-      - !type:DoActsBehavior
-        acts: [ "Destruction" ]
     - trigger:
         !type:DamageTrigger
         damage: 100

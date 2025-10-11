@@ -5,7 +5,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared.Ninja.Systems;
 using Robust.Shared.GameStates;
 using Robust.Shared.Prototypes;
@@ -29,7 +28,7 @@ public sealed partial class ItemCreatorComponent : Component
     /// The action id for creating an item.
     /// </summary>
     [DataField(required: true)]
-    public EntProtoId<InstantActionComponent> Action;
+    public EntProtoId<InstantActionComponent> Action = string.Empty;
 
     [DataField, AutoNetworkedField]
     public EntityUid? ActionEntity;

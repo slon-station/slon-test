@@ -74,9 +74,8 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using System.Text.RegularExpressions;
 using Content.Server.Speech.Components;
-using Content.Shared.Speech;
+using System.Text.RegularExpressions;
 
 namespace Content.Server.Speech.EntitySystems;
 
@@ -104,28 +103,14 @@ public sealed class FrenchAccentSystem : EntitySystem
 
         msg = _replacement.ApplyReplacements(msg, "french");
 
+        // replaces th with z
+        msg = RegexTh.Replace(msg, "'z");
+
         // replaces h with ' at the start of words.
         msg = RegexStartH.Replace(msg, "'");
 
         // spaces out ! ? : and ;.
         msg = RegexSpacePunctuation.Replace(msg, " $&");
-
-        // replaces th with 'z or 's depending on the case
-        foreach (Match match in RegexTh.Matches(msg))
-        {
-            var uppercase = msg.Substring(match.Index, 2).Contains("TH");
-            var Z = uppercase ? "Z" : "z";
-            var S = uppercase ? "S" : "s";
-            var idxLetter = match.Index + 2;
-
-            // If th is alone, just do 'z
-            if (msg.Length <= idxLetter) {
-                msg = msg.Substring(0, match.Index) + "'" + Z;
-            } else {
-                var c = "aeiouy".Contains(msg.Substring(idxLetter, 1).ToLower()) ? Z : S;
-                msg = msg.Substring(0, match.Index) + "'" + c + msg.Substring(idxLetter);
-            }
-        }
 
         return msg;
     }

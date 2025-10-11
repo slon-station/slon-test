@@ -8,7 +8,6 @@
   name: job-name-brigmedic
   description: job-description-brigmedic
   playTimeTracker: JobBrigmedic
-  setPreference: false # Slon
   requirements:
   - !type:DepartmentTimeRequirement
     department: Medical
@@ -34,18 +33,3 @@
   - !type:AddComponentSpecial
     components: # Intentionally no surgery buff, you're reliable but not powerful as a real doctor
     - type: SecurityStaff
-
-- type: chameleonOutfit
-  id: BrigmedicChameleonOutfit
-  job: Brigmedic
-  equipment:
-    eyes: ClothingEyesGlassesMed
-    mask: ClothingMaskBreathMedicalSecurity
-    ears: ClothingHeadsetBrigmedic
-    outerClothing: ClothingOuterCoatAMG
-    gloves: ClothingHandsGlovesColorWhite
-    jumpsuit: ClothingUniformJumpsuitBrigmedic
-    id: BrigmedicPDA
-    back: ClothingBackpackBrigmedic
-    shoes: ClothingShoesBootsJack
-    head: ClothingHeadHatBeretBrigmedic

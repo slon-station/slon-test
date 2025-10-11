@@ -231,7 +231,6 @@
 # SPDX-FileCopyrightText: 2025 BombasterDS <115770678+BombasterDS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 BombasterDS <deniskaporoshok@gmail.com>
 # SPDX-FileCopyrightText: 2025 BombasterDS2 <shvalovdenis.workmail@gmail.com>
-# SPDX-FileCopyrightText: 2025 CometVoid <cometsstrile@gmail.com>
 # SPDX-FileCopyrightText: 2025 FaDeOkno <143940725+FaDeOkno@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Fishbait <Fishbait@git.ml>
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
@@ -239,7 +238,6 @@
 # SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
 # SPDX-FileCopyrightText: 2025 JoeHammad1844 <130668733+JoeHammad1844@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 JoeHammad1844 <finiansalas2@gmail.com>
-# SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 K-Dynamic <20566341+K-Dynamic@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 McBosserson <148172569+McBosserson@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Milon <plmilonpl@gmail.com>
@@ -525,7 +523,6 @@
     - MedicalMisc
     - MedicalVehiclesAdvanced
     - UpgradeKits
-    - ConstructionBagOfHolding
     # Einstein Engines Packs
     - Translators
   - type: EmagLatheRecipes
@@ -596,7 +593,6 @@
     - ShuttleBoards
     # Goobstation Packs
     - SharedBoards
-    - ShuttleBoardsGoob
   - type: MaterialStorage
     whitelist:
       tags:
@@ -661,8 +657,6 @@
     - BasicCybernetics
     - MedicalCybernetics
     - AdvancedCybernetics
-    - PowerAugments
-    - ToolAugments
     - PowerCells
   - type: EmagLatheRecipes # Goobstation
     emagStaticPacks:
@@ -873,20 +867,16 @@
     - MedicalBoardsStaticGoob
     - PowerCellsStatic
     - GrenadeTriggersStatic
-    # Einstein Engines Packs
-    - SyringeCase
     dynamicPacks:
     - Chemistry
     # Goobstation Packs
     - Surgery
     - MedicalCybernetics
-    - EnvirosuitExtinguisherRefill
     - MedicalMisc
     - MedicalMiscRestricted
     - MedicalVehiclesAdvanced
     - MedicalBoards
     - Janitor
-    - Genetics
     # Einstein Engines Packs
     - Translators # Language
     - TranslatorImplanters # Language
@@ -934,7 +924,6 @@
     - Bedsheets
     # Goobstation Packs
     - ClothingCasualJumpsuits
-    - ClothingCommandSummer
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ClothingCentComm

@@ -23,7 +23,6 @@
   - type: ParticleAcceleratorFuelChamber
   - type: Construction
     graph: ParticleAcceleratorFuelChamber
-  - type: MultipartMachinePart
 
 # Unfinished
 
@@ -38,4 +37,3 @@
     sprite: Structures/Power/Generation/PA/fuel_chamber.rsi
   - type: Construction
     graph: ParticleAcceleratorFuelChamber
-  - type: MultipartMachinePart

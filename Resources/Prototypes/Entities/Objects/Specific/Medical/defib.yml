@@ -40,14 +40,14 @@
       layers:
         - state: icon
         - state: screen
-          map: [ "enum.ToggleableVisuals.Layer" ]
+          map: [ "enum.ToggleVisuals.Layer" ]
           visible: false
           shader: unshaded
     - type: Appearance
     - type: GenericVisualizer
       visuals:
-        enum.ToggleableVisuals.Enabled:
-          enum.ToggleableVisuals.Layer:
+        enum.ToggleVisuals.Toggled:
+          enum.ToggleVisuals.Layer:
             True: { visible: true }
             False: { visible: false }
     - type: Item
@@ -69,7 +69,7 @@
       price: 30
     - type: GuideHelp
       guides:
-      - MedicalDoctor
+      - Medical Doctor
     - type: LanguageSpeaker # Einstein Engines - Language
     - type: LanguageKnowledge # Einstein Engines - Language
       speaks:
@@ -112,7 +112,7 @@
     layers:
       - state: icon
       - state: screen
-        map: [ "enum.ToggleableVisuals.Layer" ]
+        map: [ "enum.ToggleVisuals.Layer" ]
         visible: false
         shader: unshaded
       - state: ready
@@ -142,7 +142,7 @@
     layers:
       - state: icon
       - state: screen
-        map: [ "enum.ToggleableVisuals.Layer" ]
+        map: [ "enum.ToggleVisuals.Layer" ]
         visible: false
         shader: unshaded
       - state: ready

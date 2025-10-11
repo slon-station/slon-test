@@ -80,12 +80,10 @@
   equipment:
     head: ClothingHeadHatWarden
 
-
 - type: loadout
   id: WardenBeret
   equipment:
     head: ClothingHeadHatBeretWarden
-
 
 # Jumpsuit
 - type: loadout
@@ -93,12 +91,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitWarden
 
-
 - type: loadout
   id: WardenJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtWarden
-
 
 # OuterClothing
 - type: loadout

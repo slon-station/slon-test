@@ -137,7 +137,7 @@
   id: BaseThiefStealAnimalObjective
   components:
   - type: StealCondition
-    verifyMapExistence: true
+    verifyMapExistence: false
     checkAlive: true
     objectiveNoOwnerText: objective-condition-steal-title-alive-no-owner
     descriptionText: objective-condition-thief-animal-description
@@ -215,6 +215,8 @@
     verifyMapExistence: false
   - type: Objective
     difficulty: 0.7
+
+
 
 - type: entity
   parent: BaseThiefStealCollectionObjective
@@ -612,7 +614,7 @@
   parent: [BaseThiefObjective, BaseLivingObjective]
   id: EscapeThiefShuttleObjective
   name: Escape to centcomm alive and unrestrained.
-  description: You don't want your illegal activities to be discovered by anyone, do you? Get out on the evacuation shuttle. # Goobstation
+  description: You don't want your illegal activities to be discovered by anyone, do you?
   components:
   - type: Objective
     difficulty: 1.3

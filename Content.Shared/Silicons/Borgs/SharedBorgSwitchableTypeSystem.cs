@@ -29,7 +29,8 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
     [Dependency] protected readonly IPrototypeManager Prototypes = default!;
     [Dependency] private readonly InteractionPopupSystem _interactionPopup = default!;
 
-    public static readonly EntProtoId ActionId = "ActionSelectBorgType";
+    [ValidatePrototypeId<EntityPrototype>]
+    public const string ActionId = "ActionSelectBorgType";
 
     public override void Initialize()
     {
@@ -65,7 +66,7 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
 
     private void OnShutdown(Entity<BorgSwitchableTypeComponent> ent, ref ComponentShutdown args)
     {
-        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.SelectTypeAction);
+        _actionsSystem.RemoveAction(ent, ent.Comp.SelectTypeAction);
     }
 
     private void OnSelectBorgTypeAction(Entity<BorgSwitchableTypeComponent> ent, ref BorgToggleSelectTypeEvent args)
@@ -102,7 +103,7 @@ public abstract class SharedBorgSwitchableTypeSystem : EntitySystem
         if (TryComp(ent, out BorgSwitchableSubtypeComponent? subtype))
             subtype.BorgSubtype = borgSubtype;
 
-        _actionsSystem.RemoveAction(ent.Owner, ent.Comp.SelectTypeAction);
+        _actionsSystem.RemoveAction(ent, ent.Comp.SelectTypeAction);
         _userInterface.CloseUi(ent.Owner, BorgSwitchableTypeUiKey.SelectBorgType);
         ent.Comp.SelectTypeAction = null;
         Dirty(ent);

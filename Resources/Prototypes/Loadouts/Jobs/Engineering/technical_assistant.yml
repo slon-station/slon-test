@@ -80,9 +80,7 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitColorYellow
 
-
 - type: loadout
   id: YellowJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtColorYellow
-

@@ -256,7 +256,7 @@ public sealed partial class LightningBoltEvent : EntityTargetActionEvent
     public EntProtoId Proto = "ChargedLightning";
 }
 
-public sealed partial class HomingToolboxEvent : WorldTargetActionEvent
+public sealed partial class HomingToolboxEvent : EntityWorldTargetActionEvent
 {
     [DataField]
     public EntProtoId Proto = "ProjectileToolboxHoming";
@@ -265,7 +265,7 @@ public sealed partial class HomingToolboxEvent : WorldTargetActionEvent
     public float ProjectileSpeed = 20f;
 }
 
-public sealed partial class SpellCardsEvent : WorldTargetActionEvent
+public sealed partial class SpellCardsEvent : EntityWorldTargetActionEvent
 {
     [DataField]
     public EntProtoId RedProto = "ProjectileSpellCardRed";

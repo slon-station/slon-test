@@ -1,6 +1,5 @@
 # SPDX-FileCopyrightText: 2025 Armok <155400926+ARMOKS@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Baptr0b0t <152836416+Baptr0b0t@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Baptr0b0t <bapt.buriot@gmail.com>
 # SPDX-FileCopyrightText: 2025 CliveOcelot <165305605+Orion-416@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Conchelle <mary@thughunt.ing>
@@ -14,7 +13,6 @@
 # SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
 # SPDX-FileCopyrightText: 2025 Solstice <solsticeofthewinter@gmail.com>
 # SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 TurboTracker <130304754+TurboTrackerss14@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
 #
@@ -284,7 +282,7 @@
   name: selectable-set-syndicate-carp-name
   description: selectable-set-syndicate-carp-description
   sprite:
-    sprite: Objects/Fun/Plushies/carp.rsi
+    sprite: Objects/Fun/toys.rsi
     state: carpplush
   content:
     - EncryptionKeySyndie
@@ -316,24 +314,24 @@
   - ClothingUniformJumpsuitAtmosSyndieAdvanced
   - ClothingBackpackDuffelSyndicateStealthHardsuitBundle
 
-- type: selectableSet
-  id: SyndicateBuilderSet
-  name: selectable-set-syndicate-builder-name
-  description: selectable-set-syndicate-builder-description
-  sprite:
-    sprite: _Goobstation/Structures/Machines/tc_printer.rsi
-    state: display
-  content:
-  - EncryptionKeySyndie
-  - TCminerFlatpack
-  - Multitool
-  - ToolboxElectricalTurretFilled
-  - ToolboxElectricalTurret
-  - SheetSteel # 30
-  - SheetSteel # 60
-  - SheetPlasteel # 30
-  - SheetPlasteel # 60
-  - PowerCellSmall
+#- type: selectableSet
+#  id: SyndicateBuilderSet
+#  name: selectable-set-syndicate-builder-name
+#  description: selectable-set-syndicate-builder-description
+#  sprite:
+#    sprite: _Goobstation/Structures/Machines/tc_printer.rsi
+#    state: display
+#  content:
+#  - EncryptionKeySyndie
+#  - TCminerFlatpack
+#  - Multitool
+#  - ToolboxElectricalTurretFilled
+#  - ToolboxElectricalTurret
+#  - SheetSteel # 30
+#  - SheetSteel # 60
+#  - SheetPlasteel # 30
+#  - SheetPlasteel # 60
+#  - PowerCellSmall
 
 # Blueshield officer
 
@@ -355,7 +353,7 @@
     sprite: _Goobstation/Objects/Weapons/Guns/Battery/erevolver.rsi
     state: icon
   content:
-    - ClothingBeltHolsterFilledBlueshield # Pistol, 1+2 lethal speedloaders and 2 disabler speedloader
+    - ClothingBeltHolsterFilledBlueshield # Pistol, 1+2 lethal speedloaders and 1 disabler speedloader
 
 - type: selectableSet
   id: BSOCQCSet
@@ -392,7 +390,7 @@
     sprite: _Goobstation/Objects/Weapons/Melee/blueshield_knife.rsi
     state: icon
   content:
-    - ClothingBeltMilitaryWebbingBSOFilled
+    - BoxCombatInjector
 
 # Blueshield hardsuits
 

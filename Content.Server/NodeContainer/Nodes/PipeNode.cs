@@ -25,11 +25,13 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Server.Atmos;
 using Content.Server.NodeContainer.EntitySystems;
 using Content.Server.NodeContainer.NodeGroups;
 using Content.Shared.Atmos;
-using Content.Shared.Atmos.Components;
 using Content.Shared.NodeContainer;
+using Content.Shared.NodeContainer.NodeGroups;
+using Robust.Shared.Map;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Utility;
 
@@ -37,7 +39,7 @@ namespace Content.Server.NodeContainer.Nodes
 {
     /// <summary>
     ///     Connects with other <see cref="PipeNode"/>s whose <see cref="PipeDirection"/>
-    ///     and <see cref="CurrentPipeLayer"/> correctly correspond.
+    ///     correctly correspond.
     /// </summary>
     [DataDefinition]
     [Virtual]
@@ -48,12 +50,6 @@ namespace Content.Server.NodeContainer.Nodes
         /// </summary>
         [DataField("pipeDirection")]
         public PipeDirection OriginalPipeDirection;
-
-        /// <summary>
-        ///     The *current* layer to which the pipe node is assigned.
-        /// </summary>
-        [DataField("pipeLayer")]
-        public AtmosPipeLayer CurrentPipeLayer = AtmosPipeLayer.Primary;
 
         /// <summary>
         ///     The *current* pipe directions (accounting for rotation)
@@ -235,7 +231,6 @@ namespace Content.Server.NodeContainer.Nodes
             foreach (var pipe in PipesInDirection(pos, pipeDir, grid, nodeQuery))
             {
                 if (pipe.NodeGroupID == NodeGroupID
-                    && pipe.CurrentPipeLayer == CurrentPipeLayer
                     && pipe.CurrentPipeDirection.HasDirection(pipeDir.GetOpposite()))
                 {
                     yield return pipe;

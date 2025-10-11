@@ -275,8 +275,6 @@
           - ProjectileBatteryAmmoProvider
           - Stunbaton
           - PowerCell
-          tags:
-          - FitsInCharger # Goobstation
         blacklist:
           tags:
           - PotatoBattery
@@ -399,7 +397,6 @@
       components:
       - BorgChassis
       - Silicon #Goobstation, allows IPCs to use cyborg chargers
-      - Inventory # Goobstation - Modsuits/Augments
   - type: ContainerContainer
     containers:
       entity_storage: !type:Container

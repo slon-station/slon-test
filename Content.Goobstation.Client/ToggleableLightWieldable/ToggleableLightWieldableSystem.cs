@@ -19,7 +19,7 @@ public sealed class ToggleableLightWieldableSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ToggleableLightWieldableComponent, GetInhandVisualsEvent>(OnGetHeldVisuals, after: new[] { typeof(ToggleableVisualsSystem) });
+        SubscribeLocalEvent<ToggleableLightWieldableComponent, GetInhandVisualsEvent>(OnGetHeldVisuals, after: new[] { typeof(ToggleableLightVisualsSystem) });
     }
 
     private void OnGetHeldVisuals(Entity<ToggleableLightWieldableComponent> ent, ref GetInhandVisualsEvent args)

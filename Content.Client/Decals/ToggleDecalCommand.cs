@@ -7,18 +7,19 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-﻿using Robust.Shared.Console;
+using Robust.Shared.Console;
 
 namespace Content.Client.Decals;
 
-public sealed class ToggleDecalCommand : LocalizedEntityCommands
+public sealed class ToggleDecalCommand : IConsoleCommand
 {
-    [Dependency] private readonly DecalSystem _decal = default!;
+    [Dependency] private readonly IEntityManager _e = default!;
 
-    public override string Command => "toggledecals";
-
-    public override void Execute(IConsoleShell shell, string argStr, string[] args)
+    public string Command => "toggledecals";
+    public string Description => "Toggles decaloverlay";
+    public string Help => $"{Command}";
+    public void Execute(IConsoleShell shell, string argStr, string[] args)
     {
-        _decal.ToggleOverlay();
+        _e.System<DecalSystem>().ToggleOverlay();
     }
 }

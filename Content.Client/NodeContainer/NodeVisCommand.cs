@@ -12,36 +12,43 @@ using Robust.Shared.Console;
 
 namespace Content.Client.NodeContainer
 {
-    public sealed class NodeVisCommand : LocalizedEntityCommands
+    public sealed class NodeVisCommand : IConsoleCommand
     {
-        [Dependency] private readonly IClientAdminManager _adminManager = default!;
-        [Dependency] private readonly NodeGroupSystem _nodeSystem = default!;
+        [Dependency] private readonly IEntityManager _e = default!;
 
-        public override string Command => "nodevis";
+        public string Command => "nodevis";
+        public string Description => "Toggles node group visualization";
+        public string Help => "";
 
-        public override void Execute(IConsoleShell shell, string argStr, string[] args)
+        public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
-            if (!_adminManager.HasFlag(AdminFlags.Debug))
+            var adminMan = IoCManager.Resolve<IClientAdminManager>();
+            if (!adminMan.HasFlag(AdminFlags.Debug))
             {
-                shell.WriteError(Loc.GetString($"shell-missing-required-permission", ("perm", "+DEBUG")));
+                shell.WriteError("You need +DEBUG for this command");
                 return;
             }
 
-            _nodeSystem.SetVisEnabled(!_nodeSystem.VisEnabled);
+            var sys = _e.System<NodeGroupSystem>();
+            sys.SetVisEnabled(!sys.VisEnabled);
         }
     }
 
-    public sealed class NodeVisFilterCommand : LocalizedEntityCommands
+    public sealed class NodeVisFilterCommand : IConsoleCommand
     {
-        [Dependency] private readonly NodeGroupSystem _nodeSystem = default!;
+        [Dependency] private readonly IEntityManager _e = default!;
 
-        public override string Command => "nodevisfilter";
+        public string Command => "nodevisfilter";
+        public string Description => "Toggles showing a specific group on nodevis";
+        public string Help => "Usage: nodevis [filter]\nOmit filter to list currently masked-off";
 
-        public override void Execute(IConsoleShell shell, string argStr, string[] args)
+        public void Execute(IConsoleShell shell, string argStr, string[] args)
         {
+            var sys = _e.System<NodeGroupSystem>();
+
             if (args.Length == 0)
             {
-                foreach (var filtered in _nodeSystem.Filtered)
+                foreach (var filtered in sys.Filtered)
                 {
                     shell.WriteLine(filtered);
                 }
@@ -49,8 +56,10 @@ namespace Content.Client.NodeContainer
             else
             {
                 var filter = args[0];
-                if (!_nodeSystem.Filtered.Add(filter))
-                    _nodeSystem.Filtered.Remove(filter);
+                if (!sys.Filtered.Add(filter))
+                {
+                    sys.Filtered.Remove(filter);
+                }
             }
         }
     }

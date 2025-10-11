@@ -11,54 +11,49 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 - type: entity
-  parent: BaseAction
   id: ActionRevertPolymorph
   name: Revert
   description: Revert back into your original form.
   components:
-  - type: ConfirmableAction
-    popup: revert-polymorph-action-popup
   - type: InstantAction
     event: !type:RevertPolymorphActionEvent
 
 - type: entity
-  abstract: true
-  parent: BaseAction
-  id: BaseActionPolymorph
+  id: ActionPolymorph
   components:
-  - type: Action
-    itemIconStyle: NoItem
-    useDelay: 60
   - type: InstantAction
     event: !type:PolymorphActionEvent
+    itemIconStyle: NoItem
 
 - type: entity
-  parent: BaseActionPolymorph
   id: ActionPolymorphWizardSpider
   name: Spider Polymorph
   description: Polymorphs you into a Spider.
   components:
-  - type: Action
+  - type: InstantAction
+    useDelay: 60
+    event: !type:PolymorphActionEvent
+      protoId: WizardSpider
+    itemIconStyle: NoItem
     icon:
       sprite: Mobs/Animals/spider.rsi
       state: tarantula
-  - type: InstantAction
-    event: !type:PolymorphActionEvent
-      protoId: WizardSpider
 
 - type: entity
-  parent: BaseActionPolymorph
   id: ActionPolymorphWizardRod
   name: Rod Form
   description: Take on the form of an immovable rod, destroying everything in your path.
   components:
-  - type: Action
-    icon:
-      sprite: Objects/Fun/immovable_rod.rsi
-      state: icon
   - type: InstantAction
-    event: !type:PolymorphActionEvent
+    raiseOnUser: true # Goobstation
+    checkCanInteract: false # Goobstation
+    useDelay: 25 # Goob edit
+    event: !type:PolymorphSpellEvent # Goob edit
       protoId: WizardRod
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
+      state: immrod # Goob edit
   - type: SpeakOnAction
     sentence: action-speech-spell-rod-form # Goobstation
   - type: Magic # Goobstation
@@ -72,9 +67,7 @@
       4: ActionPolymorphWizardRodIV
       5: ActionPolymorphWizardRodV
 
-
 - type: entity
-  parent: BaseActionPolymorph
   id: ActionPolymorphJaunt
   name: Ethereal Jaunt
   description: Melt into the Ethereal Plane for a quick getaway!
@@ -85,14 +78,17 @@
   - type: Sprite # Goobstation - for apprentices
     sprite: _Goobstation/Wizard/actions.rsi
     state: jaunt
-  - type: Action
+  - type: InstantAction
     useDelay: 30
+    raiseOnUser: true # Goobstation
+    checkCanInteract: false # Goobstation
+    event: !type:PolymorphSpellEvent # Goob edit
+      protoId: Jaunt
+      makeWizard: false # Goobstation
+    itemIconStyle: NoItem
     icon:
       sprite: _Goobstation/Wizard/actions.rsi # Goob edit
       state: jaunt
-  - type: InstantAction
-    event: !type:PolymorphActionEvent
-      protoId: Jaunt
     # TODO: Effect ECS (from cardboard box)
   - type: ActionUpgrade
     effectedLevels:
@@ -100,19 +96,37 @@
       3: ActionPolymorphJauntIII
 
 - type: entity
-  parent: ActionPolymorphJaunt
   id: ActionPolymorphJauntII
+  parent: ActionPolymorphJaunt
   name: Ethereal Jaunt II
   description: Melt into the Ethereal Plane for an even quicker getaway!
   components:
-  - type: Action
-    useDelay: 22
+  - type: InstantAction
+    useDelay: 22 # Goob edit
+    raiseOnUser: true # Goobstation
+    checkCanInteract: false # Goobstation
+    event: !type:PolymorphSpellEvent # Goob edit
+      protoId: Jaunt
+      makeWizard: false # Goobstation
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
+      state: jaunt
 
 - type: entity
-  parent: ActionPolymorphJaunt
   id: ActionPolymorphJauntIII
+  parent: ActionPolymorphJaunt
   name: Ethereal Jaunt III
   description: Are you even tangible anymore?
   components:
-  - type: Action
-    useDelay: 14
+  - type: InstantAction
+    useDelay: 14 # Goob edit
+    raiseOnUser: true # Goobstation
+    checkCanInteract: false # Goobstation
+    event: !type:PolymorphSpellEvent # Goob edit
+      protoId: Jaunt
+      makeWizard: false # Goobstation
+    itemIconStyle: NoItem
+    icon:
+      sprite: _Goobstation/Wizard/actions.rsi # Goob edit
+      state: jaunt

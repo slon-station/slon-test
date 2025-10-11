@@ -29,7 +29,6 @@
 # SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
 # SPDX-FileCopyrightText: 2025 Steve <marlumpy@gmail.com>
-# SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
 # SPDX-FileCopyrightText: 2025 marc-pelletier <113944176+marc-pelletier@users.noreply.github.com>
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
@@ -41,10 +40,6 @@
   components:
   - type: MobMover
   - type: Mech
-    pilotBlacklist: # Goobstation Change
-      components:
-      - Zombie
-      - ZombieBlob
   - type: MechAir
   - type: AirFilter
     # everything except oxygen and nitrogen
@@ -56,11 +51,10 @@
     - Ammonia
     - NitrousOxide
     - Frezon
-    #- Helium3 TODO: fusion
-    # <Goobstation> - healium not included for ADVANCED mech trolling
     - BZ
+    - Healium
     - Nitrium
-    # </Goobstation>
+    #- Helium3 TODO: fusion
     # remove everything except oxygen to maintain oxygen ratio
     overflowGases:
     - Nitrogen
@@ -71,13 +65,11 @@
     - Ammonia
     - NitrousOxide
     - Frezon
-    #- Helium3 TODO: fusion
-    # <Goobstation>
     - BZ
     - Healium
     - Nitrium
     - Pluoxium
-    # </Goobstation>
+    #- Helium3 TODO: fusion
   - type: AirIntake
   # for intake and filter to work
   - type: AtmosDevice
@@ -107,7 +99,7 @@
   - type: InteractionOutline
   - type: MovementSpeedModifier
     baseWalkSpeed: 1
-    baseSprintSpeed: 1 #Goobedit
+    baseSprintSpeed: 2
   - type: Tag
     tags:
     - DoorBumpOpener
@@ -218,6 +210,7 @@
     pilotWhitelist:
       components:
         - HumanoidAppearance
+        - BorgChassis # Goobstation - Let borgs pilot mechs
   - type: MeleeWeapon
     hidden: true
     attackRate: 1
@@ -227,7 +220,7 @@
         Structural: 30 # Goobstation - Make ripley punch hard
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.25
-    baseSprintSpeed: 2.25 #Goobedit
+    baseSprintSpeed: 3.6
 
 - type: entity
   id: MechRipleyBattery
@@ -257,9 +250,6 @@
       collection: FootstepClown
       params:
         variation: 0.17
-  - type: MovementSpeedModifier
-    baseWalkSpeed: 2
-    baseSprintSpeed: 2.5 #Goobedit
   - type: Mech
     baseState: honker
     openState: honker-open
@@ -269,6 +259,7 @@
     pilotWhitelist:
       components:
       - HumanoidAppearance
+      - BorgChassis # Goobstation - Let borgs pilot mechs
 
 - type: entity
   parent: MechHonker
@@ -315,7 +306,7 @@
         Structural: 2
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.4
-    baseSprintSpeed: 2.4 #Goobedit
+    baseSprintSpeed: 3.7
 
 - type: entity
   parent: MechHamtr
@@ -378,7 +369,7 @@
         Structural: 2
   - type: MovementSpeedModifier
     baseWalkSpeed: 2.25
-    baseSprintSpeed: 2.25 #Goobedit
+    baseSprintSpeed: 3.6
   - type: Access
     tags:
     - Maintenance

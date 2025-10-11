@@ -87,11 +87,11 @@
   icon: "JobIconPassenger"
   supervisors: job-supervisors-everyone
   goobcoins: 0 #Goob content
-#  special: # Slon - what the fuck
-#  - !type:PlaytimeDegrade # MisandryBox - tider main syndrome
-#    since: 600
-#    until: 24600
-#    disarmMalus: true
+  special:
+  - !type:PlaytimeDegrade # MisandryBox - tider main syndrome
+    since: 600
+    until: 24600
+    disarmMalus: true
   access:
   - Maintenance
 
@@ -103,14 +103,3 @@
   #storage:
     #back:
     #- Stuff
-
-- type: chameleonOutfit
-  id: PassengerChameleonOutfit
-  job: Passenger
-  equipment:
-    head: ClothingHeadHatWelding
-    eyes: ClothingEyesGlassesCheapSunglasses
-    mask: ClothingMaskGas
-    neck: ClothingNeckMantle
-    outerClothing: ClothingOuterWinterCoat
-    gloves: ClothingHandsGlovesColorYellowBudget

@@ -369,15 +369,6 @@
   - type: GuideHelp
     guides:
     - ShuttleCraft
-  # Frontier edit start
-  - type: DeviceLinkSource
-    ports:
-    - SignalShuttleConsole1
-    - SignalShuttleConsole2
-    - SignalShuttleConsole3
-    - SignalShuttleConsole4
-    range: 90
-  # Frontier edit end
 
 - type: entity
   parent: BaseComputerShuttle
@@ -1153,7 +1144,7 @@
     account: Engineering
     announcementChannel: Engineering
     removeLimitAccess: [ "ChiefEngineer" ]
-    mode: SendToPrimary
+    slipPrinter: false # goob
   - type: ActiveRadio
     channels:
     - Engineering
@@ -1186,7 +1177,7 @@
     account: Medical
     announcementChannel: Medical
     removeLimitAccess: [ "ChiefMedicalOfficer" ]
-    mode: SendToPrimary
+    slipPrinter: false # goob
   - type: ActiveRadio
     channels:
     - Medical
@@ -1219,7 +1210,7 @@
     account: Science
     announcementChannel: Science
     removeLimitAccess: [ "ResearchDirector" ]
-    mode: SendToPrimary
+    slipPrinter: false # goob
   - type: ActiveRadio
     channels:
     - Science
@@ -1252,7 +1243,7 @@
     account: Security
     announcementChannel: Security
     removeLimitAccess: [ "HeadOfSecurity" ]
-    mode: SendToPrimary
+    slipPrinter: false # goob
   - type: ActiveRadio
     channels:
     - Security
@@ -1285,7 +1276,7 @@
     account: Service
     announcementChannel: Service
     removeLimitAccess: [ "HeadOfPersonnel" ]
-    mode: SendToPrimary
+    slipPrinter: false # goob
   - type: ActiveRadio
     channels:
     - Service

@@ -182,13 +182,13 @@
   id: MagazinePistol
   name: pistol magazine (.35 auto)
   parent: BaseMagazinePistol
-  description: 12-round single-stack magazine for pistols. Intended to hold general-purpose kinetic ammunition. #goobstation
+  description: 10-round single-stack magazine for pistols. Intended to hold general-purpose kinetic ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistol
   - type: Sprite
     layers:
-    - state: base
+    - state: red
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -196,15 +196,19 @@
     inhandVisuals:
       left:
       - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#9b0000"
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#9b0000"
 
 - type: entity
   id: MagazinePistolEmpty
   name: pistol magazine (.35 auto any)
   suffix: empty
   parent: MagazinePistol
-  description: 12-round single-stack magazine for pistols. #goobstation
+  description: 10-round single-stack magazine for pistols.
   components:
   - type: BallisticAmmoProvider
     proto: null
@@ -225,72 +229,50 @@
   id: MagazinePistolIncendiary
   name: pistol magazine (.35 auto incendiary)
   parent: MagazinePistol
-  description: 12-round single-stack magazine for pistols. Intended to hold self-igniting incendiary ammunition. #goobstation
+  description: 10-round single-stack magazine for pistols. Intended to hold self-igniting incendiary ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolIncendiary
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#ff6e52"
-  - type: Item
-    inhandVisuals:
-      left:
-      - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#ff6e52"
-      right:
-      - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#ff6e52"
 
 - type: entity
   id: MagazinePistolPractice
   name: pistol magazine (.35 auto practice)
   parent: BaseMagazinePistol
-  description: 12-round single-stack magazine for pistols. Intended to hold non-harmful chalk ammunition. #goobstation
+  description: 10-round single-stack magazine for pistols. Intended to hold non-harmful chalk ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolPractice
   - type: Sprite
     layers:
-    - state: base
+    - state: practice
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#dbdbdb"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#dbdbdb"
+        color: "#ea5800"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#dbdbdb"
+        color: "#ea5800"
 
 - type: entity
   id: MagazinePistolUranium
   name: pistol magazine (.35 auto uranium)
   parent: BaseMagazinePistol
-  description: 12-round single-stack magazine for pistols. Intended to hold exotic uranium-core ammunition. #goobstation
+  description: 10-round single-stack magazine for pistols. Intended to hold exotic uranium-core ammunition.
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolUranium
   - type: Sprite
     layers:
-    - state: base
+    - state: uranium
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#00cd42"
   - type: Item
     inhandVisuals:
       left:
@@ -332,7 +314,7 @@
     proto: CartridgePistol
   - type: Sprite
     layers:
-    - state: base
+    - state: red
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -340,8 +322,12 @@
     inhandVisuals:
       left:
       - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#9b0000"
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#9b0000"
 
 - type: entity
   id: MagazinePistolHighCapacityPractice
@@ -352,22 +338,20 @@
     proto: CartridgePistol
   - type: Sprite
     layers:
-    - state: base
+    - state: practice
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#dbdbdb"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#dbdbdb"
+        color: "#ea5800"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#dbdbdb"
+        color: "#ea5800"
 
 - type: entity
   id: MagazinePistolHighCapacityRubber
@@ -378,7 +362,7 @@
     proto: CartridgePistol
   - type: Sprite
     layers:
-    - state: base
+    - state: rubber
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -398,7 +382,7 @@
       path: /Audio/Weapons/Guns/MagIn/bullet_insert.ogg
   - type: Sprite
     layers:
-    - state: base
+    - state: red
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
@@ -406,8 +390,12 @@
     inhandVisuals:
       left:
       - state: inhand-left-mag
+      - state: inhand-left-stripe
+        color: "#9b0000"
       right:
       - state: inhand-right-mag
+      - state: inhand-right-stripe
+        color: "#9b0000"
 
 - type: entity
   id: MagazinePistolSubMachineGunEmpty
@@ -441,22 +429,20 @@
     proto: CartridgePistolPractice
   - type: Sprite
     layers:
-    - state: base
+    - state: practice
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#dbdbdb"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
       - state: inhand-left-stripe
-        color: "#dbdbdb"
+        color: "#ea5800"
       right:
       - state: inhand-right-mag
       - state: inhand-right-stripe
-        color: "#dbdbdb"
+        color: "#ea5800"
 
 - type: entity
   id: MagazinePistolSubMachineGunUranium
@@ -468,12 +454,10 @@
     proto: CartridgePistolUranium
   - type: Sprite
     layers:
-    - state: base
+    - state: uranium
       map: ["enum.GunVisualLayers.Base"]
     - state: mag-1
       map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#00cd42"
   - type: Item
     inhandVisuals:
       left:
@@ -493,22 +477,10 @@
   components:
   - type: BallisticAmmoProvider
     proto: CartridgePistolIncendiary
-  - type: Sprite
-    layers:
-    - state: base
-      map: ["enum.GunVisualLayers.Base"]
-    - state: mag-1
-      map: ["enum.GunVisualLayers.Mag"]
-    - state: stripe
-      color: "#ff6e52"
   - type: Item
     inhandVisuals:
       left:
       - state: inhand-left-mag
-      - state: inhand-left-stripe
-        color: "#ff6e52"
       right:
       - state: inhand-right-mag
-      - state: inhand-right-stripe
-        color: "#ff6e52"
 

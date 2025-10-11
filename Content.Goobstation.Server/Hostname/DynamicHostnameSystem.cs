@@ -6,8 +6,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-/* Slon - this just doesn't work lol
-
 using Robust.Shared;
 using Robust.Shared.Configuration;
 using Content.Goobstation.Common.CCVar;
@@ -82,5 +80,3 @@ public sealed class DynamicHostnameSystem : EntitySystem
         _configuration.SetCVar(CVars.GameHostName, hostname);
     }
 }
-
-*/

@@ -10,11 +10,3 @@
   targetNode: toygrenade
   category: construction-category-misc
   objectType: Item
-
-- type: construction
-  id: GangSpray
-  graph: GangSpray
-  startNode: start
-  targetNode: end
-  category: construction-category-misc
-  objectType: Item

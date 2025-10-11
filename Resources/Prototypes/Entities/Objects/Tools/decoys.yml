@@ -40,9 +40,7 @@
     nameFormat: name-format-nukie-generic
   - type: Damageable
     damageContainer: Inorganic
-  - type: ToggleableVisuals
-    spriteLayer: light
-  - type: ItemTogglePointLight
+  - type: ToggleableLightVisuals
   - type: Foldable
     folded: true
   - type: PowerCellSlot

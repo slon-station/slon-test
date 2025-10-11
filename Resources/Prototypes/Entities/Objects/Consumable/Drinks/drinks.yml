@@ -330,10 +330,10 @@
   - type: SolutionContainerManager
     solutions:
       drink:
-        maxVol: 20
+        maxVol: 30
         reagents:
         - ReagentId: Absinthe
-          Quantity: 20
+          Quantity: 30
   - type: Icon
     sprite: Objects/Consumable/Drinks/absintheglass.rsi
     state: icon

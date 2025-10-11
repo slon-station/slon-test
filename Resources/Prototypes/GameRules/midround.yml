@@ -34,6 +34,9 @@
   - type: AntagObjectives
     objectives:
     - EscapeThiefShuttleObjective
+  # Goobstation
+  - type: GameRule
+    chaosScore: 300
   - type: AntagRandomObjectives
     sets:
     - groups: ThiefBigObjectiveGroups
@@ -49,7 +52,6 @@
     - prefRoles: [ Thief ]
       max: 3
       playerRatio: 15
-      chaosScore: 100 # Goobstation
       lateJoinAdditional: true
       allowNonHumans: true
       multiAntagSetting: NotExclusive
@@ -60,9 +62,6 @@
         - CommandStaff
       components:
       - type: Pacified
-      - type: Thieving
-        stripTimeReduction: 2
-        stealthy: true
       mindRoles:
       - MindRoleThief
       briefing:

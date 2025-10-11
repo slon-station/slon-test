@@ -19,10 +19,6 @@
 // SPDX-FileCopyrightText: 2025 August Eymann <august.eymann@gmail.com>
 // SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 LuciferEOS <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 LuciferMkshelter <stepanteliatnik2022@gmail.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -170,8 +166,11 @@ public sealed partial class StoreMenu : DefaultWindow
         else if (listing.ProductAction != null)
         {
             var actionId = _entityManager.Spawn(listing.ProductAction);
-            if (_entityManager.System<ActionsSystem>().GetAction(actionId)?.Comp?.Icon is {} icon)
-                texture = spriteSys.Frame0(icon);
+            if (_entityManager.System<ActionsSystem>().TryGetActionData(actionId, out var action) &&
+                action.Icon != null)
+            {
+                texture = spriteSys.Frame0(action.Icon);
+            }
         }
 
         var newListing = new StoreListingControl(listing, GetListingPriceString(listing), hasBalance, texture);
@@ -264,9 +263,6 @@ public sealed partial class StoreMenu : DefaultWindow
                 ToggleMode = true,
                 StyleClasses = { "OpenBoth" }
             };
-
-            if (proto.Evil) // Goobstation
-                catButton.AddStyleClass("ButtonColorRed");
 
             catButton.OnPressed += args => OnCategoryButtonPressed?.Invoke(args, catButton.Id);
             CategoryListContainer.AddChild(catButton);

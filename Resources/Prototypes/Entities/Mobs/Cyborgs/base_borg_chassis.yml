@@ -145,8 +145,6 @@
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
-# SPDX-FileCopyrightText: 2025 John Willis <143434770+CerberusWolfie@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 MarkerWicker <markerWicker@proton.me>
 # SPDX-FileCopyrightText: 2025 Quantum-cross <7065792+Quantum-cross@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Rouden <149893554+Roudenn@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Roudenn <romabond091@gmail.com>
@@ -156,7 +154,6 @@
 # SPDX-FileCopyrightText: 2025 Scruq445 <storchdamien@gmail.com>
 # SPDX-FileCopyrightText: 2025 Ted Lukin <66275205+pheenty@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Theodore Lukin <66275205+pheenty@users.noreply.github.com>
-# SPDX-FileCopyrightText: 2025 Zekins <zekins3366@gmail.com>
 # SPDX-FileCopyrightText: 2025 Timfa <timfalken@hotmail.com>
 # SPDX-FileCopyrightText: 2025 chromiumboy <50505512+chromiumboy@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 crasg <109207982+Scruq445@users.noreply.github.com>
@@ -197,7 +194,7 @@
         shape:
           !type:PhysShapeCircle
           radius: 0.35
-        density: 300
+        density: 150
         mask:
         - MobMask
         layer:
@@ -252,7 +249,7 @@
   - type: IntrinsicUI
     uis:
       enum.StationMapUiKey.Key:
-        toggleAction: ActionShowStationMap
+        toggleAction: ActionAGhostShowStationMap
   - type: Targeting # Shitmed Change
   - type: ActivatableUI
     key: enum.BorgUiKey.Key
@@ -338,11 +335,6 @@
   - type: Speech
     speechVerb: Robotic
     speechSounds: Borg
-    allowedEmotes: # Goobstation - Cyborg emote sounds
-    - Laugh
-    - Sigh
-    - Crying
-    - Whistle
   - type: Vocal
     sounds:
       Unsexed: UnisexSilicon
@@ -398,22 +390,21 @@
     radiatingBehaviourId: radiating
   - type: LightBehaviour
     behaviours:
-      - !type:FadeBehaviour
-        id: radiating
-        maxDuration: 2.0
-        startValue: 3.0
-        endValue: 2.0
-        isLooped: true
-        reverseWhenFinished: true
-      - !type:PulseBehaviour
-        id: blinking
-        interpolate: Nearest
-        maxDuration: 1.0
-        startValue: 0.1
-        endValue: 2.0
-        isLooped: true
-  - type: ToggleableVisuals
-    spriteLayer: light
+    - !type:FadeBehaviour
+      id: radiating
+      maxDuration: 2.0
+      startValue: 3.0
+      endValue: 2.0
+      isLooped: true
+      reverseWhenFinished: true
+    - !type:PulseBehaviour
+      id: blinking
+      interpolate: Nearest
+      maxDuration: 1.0
+      minValue: 0.1
+      maxValue: 2.0
+      isLooped: true
+  - type: ToggleableLightVisuals
   - type: PointLight
     enabled: false
     mask: /Textures/Effects/LightMasks/cone.png
@@ -431,7 +422,6 @@
     - CanPilot
     - Unimplantable
     - SiliconMob
-    - SiliconEmotes
   - type: Emoting
   - type: GuideHelp
     guides:
@@ -452,8 +442,6 @@
   - type: Penetratable # Goobstation - Better snipers
     penetrateDamage: 75 # It's harder to kill iron golem
     damagePenalty: 0.25
-  - type: SpeechSynthesis # Corvax-Frontier-Barks
-    voice: Borg
 
 - type: entity
   abstract: true
@@ -571,11 +559,6 @@
     speechSounds: SyndieBorg
     allowedEmotes:
     - Laugh
-    # Goobstation - Cyborg emote sounds
-    - Sigh
-    - Crying
-    - Whistle
-    # end Goobstation - Cyborg emote sounds
   - type: Vocal
     sounds:
       Unsexed: UnisexSiliconSyndicate
@@ -587,8 +570,6 @@
   - type: ExplosionResistance #Goobstation - Ion Damage
     damageCoefficient: 0.5
   - type: FlashImmunity
-  - type: SpeechSynthesis # Corvax-Frontier-Barks
-    voice: BorgSyndie
 
 - type: entity
   id: BaseBorgChassisDerelict
@@ -661,11 +642,6 @@
     speechSounds: Xenoborg
     allowedEmotes:
     - Laugh
-    # Goobstation - Cyborg emote sounds
-    - Sigh
-    - Crying
-    - Whistle
-    # end Goobstation - Cyborg emote sounds
   - type: Vocal
     sounds:
       Unsexed: UnisexSiliconXenoborg

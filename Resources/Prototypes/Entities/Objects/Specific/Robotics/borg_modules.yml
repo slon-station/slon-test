@@ -21,6 +21,7 @@
 # SPDX-FileCopyrightText: 2024 Hrosts <35345601+Hrosts@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 IProduceWidgets <107586145+IProduceWidgets@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Ian <ignaz.k@live.de>
+# SPDX-FileCopyrightText: 2024 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 JIP <jipdawg93@gmail.com>
 # SPDX-FileCopyrightText: 2024 JIPDawg <51352440+JIPDawg@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2024 Joel Zimmerman <JoelZimmerman@users.noreply.github.com>
@@ -99,7 +100,6 @@
 # SPDX-FileCopyrightText: 2025 Aviu00 <93730715+Aviu00@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Ghagliiarghii <68826635+Ghagliiarghii@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-# SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
 # SPDX-FileCopyrightText: 2025 Nox <nebulousnox38@gmail.com>
 # SPDX-FileCopyrightText: 2025 RatherUncreative <RatherUncreativeName@proton.me>
@@ -172,15 +172,13 @@
       provided_container: !type:Container { }
 
 - type: entity
-  parent: BaseAction
   id: ActionBorgSwapModule
   name: Swap Module
   description: Select this module, enabling you to use the tools it provides.
   components:
-  - type: Action
+  - type: InstantAction
     itemIconStyle: BigAction
     useDelay: 0.5
-  - type: InstantAction
     event: !type:BorgModuleActionSelectedEvent
 
 - type: entity
@@ -571,8 +569,7 @@
     items:
     - BorgFireExtinguisher
     - BorgHandheldGPSBasic
-    - HandheldStationMapUnpowered
-    #- HandHeldMassScannerBorg # Lavaland Change
+    - HandHeldMassScannerBorg # removed by lavaland
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: extinguisher-module }
 
@@ -656,15 +653,6 @@
     - Shovel
     - AdvancedMineralScannerUnpowered
     - OreBagOfHolding
-  # Goob start
-  - type: DroppableBorgModule
-    moduleId: AdvancedMining
-    items:
-    - id: WeaponProtoKineticAccelerator
-      whitelist:
-        components:
-        - PressureDamageChange
-  # Goob end
   - type: BorgModuleIcon
     icon: { sprite: Interface/Actions/actions_borg.rsi, state: adv-mining-module }
 
@@ -741,7 +729,7 @@
         components:
         - Electronics
         - MachineBoard
-    - id: MicroManipulatorStockPart
+    - id: CapacitorStockPart
       whitelist:
         components:
         - StockPart
@@ -1137,8 +1125,6 @@
       - state: base-part-inhand-right
       - state: base-stripes-inhand-right
         color: "#7B0F12"
-  - type: StaticPrice
-    price: 2500
 
 - type: entity
   id: BorgModuleOperative
@@ -1230,8 +1216,6 @@
         - state: base-part-inhand-right
         - state: base-stripes-inhand-right
           color: "#7B0F12"
-    - type: StaticPrice
-      price: 2000
 
 # Shitmed Modules
 

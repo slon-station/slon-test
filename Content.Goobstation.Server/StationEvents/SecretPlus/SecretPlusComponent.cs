@@ -7,18 +7,17 @@
 using Content.Goobstation.Common.StationEvents.SecretPlus;
 using Content.Shared.Random;
 using Robust.Shared.Prototypes;
-using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom;
 
 namespace Content.Goobstation.Server.StationEvents.SecretPlus;
 
-[RegisterComponent, AutoGenerateComponentPause, Access(typeof(SecretPlusSystem))]
+[RegisterComponent, Access(typeof(SecretPlusSystem))]
 public sealed partial class SecretPlusComponent : Component
 {
     /// <summary>
     ///   How long until the next check for an event runs
     ///   Default value is how long until first event is allowed
     /// </summary>
-    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoPausedField]
+    [DataField]
     public TimeSpan TimeNextEvent;
 
     /// <summary>

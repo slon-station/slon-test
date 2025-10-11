@@ -60,9 +60,6 @@
 // SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 SX_7 <sn1.test.preria.2002@gmail.com>
 // SPDX-FileCopyrightText: 2025 SlamBamActionman <83650252+SlamBamActionman@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
-// SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -75,7 +72,6 @@ using Content.Shared.Camera;
 using Content.Shared.Damage;
 using Content.Shared.Database;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared._Shitmed.Targeting; // Shitmed
 using Content.Shared.Projectiles;
 using Robust.Shared.Physics.Events;
 using Robust.Shared.Player;
@@ -116,13 +112,7 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             return;
         }
 
-        // Shitmed start
-        var targetPart = TargetBodyPart.Chest;
-        if (component.Shooter != null && TryComp<TargetingComponent>(component.Shooter.Value, out var targeting))
-            targetPart = targeting.Target;
-        // Shitmed end
-
-        var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter, targetPart); // Shitmed change
+        var ev = new ProjectileHitEvent(component.Damage * _damageableSystem.UniversalProjectileDamageModifier, target, component.Shooter);
         RaiseLocalEvent(uid, ref ev);
 
         var otherName = ToPrettyString(target);
@@ -132,10 +122,10 @@ public sealed class ProjectileSystem : SharedProjectileSystem
             damageRequired -= damageableComponent.TotalDamage;
             damageRequired = FixedPoint2.Max(damageRequired, FixedPoint2.Zero);
         }
-        var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, damageable: damageableComponent, origin: component.Shooter, targetPart: ev.TargetPart, canMiss: ev.CanMiss); // Goob and Shitmed edit
+        var modifiedDamage = _damageableSystem.TryChangeDamage(target, ev.Damage, component.IgnoreResistances, damageable: damageableComponent, origin: component.Shooter); // Goob edit
         var deleted = Deleted(target);
 
-        if (modifiedDamage is not null && Exists(component.Shooter))
+        if (modifiedDamage is not null && EntityManager.EntityExists(component.Shooter))
         {
             if (modifiedDamage.AnyPositive() && !deleted)
             {

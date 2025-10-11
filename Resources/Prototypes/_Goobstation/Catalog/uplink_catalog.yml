@@ -26,6 +26,7 @@
 # SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 # SPDX-FileCopyrightText: 2025 Ilya246 <57039557+Ilya246@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 Ilya246 <ilyukarno@gmail.com>
+# SPDX-FileCopyrightText: 2025 IrisTheAmped <iristheamped@gmail.com>
 # SPDX-FileCopyrightText: 2025 Lincoln McQueen <lincoln.mcqueen@gmail.com>
 # SPDX-FileCopyrightText: 2025 LuciferEOS <stepanteliatnik2022@gmail.com>
 # SPDX-FileCopyrightText: 2025 LuciferMkshelter <154002422+LuciferEOS@users.noreply.github.com>
@@ -51,6 +52,7 @@
 # SPDX-FileCopyrightText: 2025 fishbait <gnesse@gmail.com>
 # SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 # SPDX-FileCopyrightText: 2025 gus <august.eymann@gmail.com>
+# SPDX-FileCopyrightText: 2025 loltart <lo1tartyt@gmail.com>
 # SPDX-FileCopyrightText: 2025 pheenty <fedorlukin2006@gmail.com>
 # SPDX-FileCopyrightText: 2025 terminatorbo <kovalevb059@gmail.com>
 #
@@ -65,16 +67,6 @@
   productEntity: CrateNPCGondola
   cost:
     Telecrystal: 30
-  categories:
-    -  UplinkDisruption
-
-- type: listing
-  id: UplinkCarpCaller
-  name: uplink-carpcaller-name
-  description: uplink-carpcaller-desc
-  productEntity: CarpCaller
-  cost:
-    Telecrystal: 40 # you can't really do much with it
   categories:
     -  UplinkDisruption
 
@@ -295,19 +287,6 @@
       tags:
       - NukeOpsUplink
 
-- type: listing
-  id: UplinkTelecrystalMiner
-  name: uplink-tcminer-name
-  description: uplink-tcminer-desc
-  productEntity: TCminerFlatpack
-  cost:
-    Telecrystal: 100
-  categories:
-    - UplinkDisruption
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
-
 # Weaponry
 
 # - type: listing
@@ -408,16 +387,16 @@
   categories:
   - UplinkWeaponry
 
-#- type: listing # Slon - bloat
-#  id: UplinkWeaponShotgunHeavy
-#  name: uplink-weapon-heavy-shotgun-name
-#  description: uplink-weapon-heavy-shotgun-desc
-#  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Shotguns/magshot.rsi, state: icon }
-#  productEntity: WeaponShotgunHeavy
-#  cost:
-#    Telecrystal: 200
-#  categories:
-#  - UplinkWeaponry
+- type: listing
+  id: UplinkWeaponShotgunHeavy
+  name: uplink-weapon-heavy-shotgun-name
+  description: uplink-weapon-heavy-shotgun-desc
+  icon: { sprite: /Textures/_Goobstation/Objects/Weapons/Guns/Shotguns/magshot.rsi, state: icon }
+  productEntity: WeaponShotgunHeavy
+  cost:
+    Telecrystal: 200
+  categories:
+  - UplinkWeaponry
 
 - type: listing
   id: UplinkBowHardlight
@@ -455,6 +434,11 @@
     Telecrystal: 38 # This + esword = 75 TC
   categories:
   - UplinkWeaponry
+  conditions:
+  - !type:StoreWhitelistCondition
+    blacklist:
+      tags:
+      - NukeOpsUplink
 
 - type: listing
   id: UplinkBulkMosin
@@ -466,15 +450,15 @@
   categories:
     - UplinkWeaponry
 
-#- type: listing # Slon - bloat
-#  id: UplinkWeaponM7S
-#  name: uplink-m7s-name
-#  description: uplink-m7s-desc
-#  productEntity: WeaponSubMachineGunM7S
-#  cost:
-#    Telecrystal: 60
-#  categories:
-#    -  UplinkWeaponry
+- type: listing
+  id: UplinkWeaponM7S
+  name: uplink-m7s-name
+  description: uplink-m7s-desc
+  productEntity: WeaponSubMachineGunM7S
+  cost:
+    Telecrystal: 60
+  categories:
+    -  UplinkWeaponry
 
 - type: listing
   id: UplinkWeaponHE1SG8
@@ -690,22 +674,6 @@
     - Clown
 
 - type: listing
-  id: UplinkClowncarNukie
-  name: uplink-clowncar-name
-  description: uplink-clowncar-desc
-  icon: { sprite: /Textures/_Goobstation/Objects/Vehicles/clowncar.rsi, state: clowncar }
-  productEntity: CrateFunClownCarNukieUplink
-  cost:
-    Telecrystal: 25
-  categories:
-  - UplinkPointless
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-
-- type: listing
   id: UplinkMobRoachMicrobomb
   name: uplink-mobroach-microbomb-name
   description: uplink-mobroach-microbomb-desc
@@ -781,7 +749,7 @@
   description: uplink-advanced-combat-medipen-desc
   productEntity: AdvancedCombatMedipen
   cost:
-    Telecrystal: 20
+    Telecrystal: 28
   categories:
   - UplinkChemicals
 
@@ -815,22 +783,22 @@
   categories:
   - UplinkChemicals
 
-- type: listing
-  id: UplinkMedicalBeamGunSyndicate
-  name: uplink-medical-beam-gun-name
-  description: uplink-medical-beam-gun-desc
-  productEntity: MedicalBeamGunSyndicateBattery
-  cost:
-    Telecrystal: 100
-  categories:
-  - UplinkChemicals
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsMedicUplink
-  - !type:ListingLimitedStockCondition
-    stock: 1
+#- type: listing Removed pending rework™
+#  id: UplinkMedicalBeamGunSyndicate
+#  name: uplink-medical-beam-gun-name
+#  description: uplink-medical-beam-gun-desc
+#  productEntity: MedicalBeamGunSyndicateBattery
+#  cost:
+#    Telecrystal: 100
+#  categories:
+#  - UplinkChemicals
+#  conditions:
+#  - !type:StoreWhitelistCondition
+#    whitelist:
+#      tags:
+#      - NukeOpsMedicUplink
+#  - !type:ListingLimitedStockCondition
+#    stock: 1
 
 - type: listing
   id: UplinkCombatMedkitPills
@@ -1102,34 +1070,34 @@
 #  categories:
 #  - UplinkAmmo
 
-#- type: listing # Slon - bloat
-#  id: UplinkMagazineShotgunHeavy
-#  name: uplink-heavy-shotgun-magazine-name
-#  description: uplink-heavy-shotgun-magazine-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon }
-#  productEntity: MagazineShotgunHeavy
-#  cost:
-#    Telecrystal: 30
-#  categories:
-#  - UplinkAmmo
+- type: listing
+  id: UplinkMagazineShotgunHeavy
+  name: uplink-heavy-shotgun-magazine-name
+  description: uplink-heavy-shotgun-magazine-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon }
+  productEntity: MagazineShotgunHeavy
+  cost:
+    Telecrystal: 30
+  categories:
+  - UplinkAmmo
 
-#- type: listing
-#  id: UplinkMagazineShotgunHeavySlug
-#  name: uplink-heavy-shotgun-magazine-slug-name
-#  description: uplink-heavy-shotgun-magazine-slug-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon2 }
-#  productEntity: MagazineShotgunHeavySlug
-#  cost:
-#    Telecrystal: 40
-#  categories:
-#  - UplinkAmmo
+- type: listing
+  id: UplinkMagazineShotgunHeavySlug
+  name: uplink-heavy-shotgun-magazine-slug-name
+  description: uplink-heavy-shotgun-magazine-slug-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/heavy_shotgun.rsi, state: icon2 }
+  productEntity: MagazineShotgunHeavySlug
+  cost:
+    Telecrystal: 40
+  categories:
+  - UplinkAmmo
 
 # 弾薬
 - type: listing
   id: UplinkCaselessRifleMag
   name: uplink-rifle-caseless-mag-name
   description: uplink-rifle-caseless-mag-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi, state: base }
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_rifle_mag.rsi, state: red }
   productEntity: MagazineCaselessRifle
   cost:
     Telecrystal: 8 # Much more damage than C20 or M90 (780, 98 dmg per TC), but hollow-point
@@ -1140,7 +1108,7 @@
   id: UplinkHighCapacityMagazinePistol
   name: uplink-highcap-pistol-mag-name
   description: uplink-highcap-pistol-mag-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: base }
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/Pistol/pistol_high_capacity_mag.rsi, state: red }
   productEntity: MagazinePistolHighCapacity
   cost:
     Telecrystal: 3
@@ -1177,23 +1145,23 @@
   id: UplinkMagazinePistolCaselessRifleSAPHE
   name: uplink-pistol-magazine-caseless-saphe-name
   description: uplink-pistol-magazine-caseless-saphe-desc
-  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: base }
+  icon: { sprite: /Textures/Objects/Weapons/Guns/Ammunition/Magazine/CaselessRifle/caseless_pistol_mag.rsi, state: practice }
   productEntity: MagazinePistolCaselessRifleSAPHE
   cost:
     Telecrystal: 5 # 23 damage but ~1/3 of a rifle magazine and semi armor piercing, remember the damage is 13 pierce 10.5 explosive
   categories:
   - UplinkAmmo
 
-#- type: listing # Slon - bloat
-#  id: UplinkMagazineM7S
-#  name: uplink-m7s-mag-name
-#  description: uplink-m7s-mag-desc
-#  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/M7S_magazine.rsi, state: icon }
-#  productEntity: MagazineLowCaliberM7S
-#  cost:
-#    Telecrystal: 5 # 105 dmg per TC which seems huge, but you're missing half of your shots
-#  categories:
-#  - UplinkAmmo
+- type: listing
+  id: UplinkMagazineM7S
+  name: uplink-m7s-mag-name
+  description: uplink-m7s-mag-desc
+  icon: { sprite: _Goobstation/Objects/Weapons/Guns/Ammunition/Magazine/M7S_magazine.rsi, state: icon }
+  productEntity: MagazineLowCaliberM7S
+  cost:
+    Telecrystal: 5 # 105 dmg per TC which seems huge, but you're missing half of your shots
+  categories:
+  - UplinkAmmo
 
 - type: listing
   id: UplinkCartridgeG8Demolishing
@@ -1237,16 +1205,16 @@
   categories:
   - UplinkAmmo
 
-#- type: listing # Slon - bloat
-#  id: UplinkBox8GaugeFlash
-#  name: uplink-high-caliber-shotgun-box-flash-slug-name
-#  description: uplink-high-caliber-shotgun-box-flash-slug-desc
-#  icon: { sprite: Objects/Weapons/Guns/Ammunition/Boxes/shotgun.rsi, state: icon-incendiary }
-#  productEntity: MagazineBoxShotgunHighCaliberFlash
-#  cost:
-#    Telecrystal: 1
-#  categories:
-#  - UplinkAmmo
+- type: listing
+  id: UplinkBox8GaugeFlash
+  name: uplink-high-caliber-shotgun-box-flash-slug-name
+  description: uplink-high-caliber-shotgun-box-flash-slug-desc
+  icon: { sprite: Objects/Weapons/Guns/Ammunition/Boxes/shotgun.rsi, state: icon-incendiary }
+  productEntity: MagazineBoxShotgunHighCaliberFlash
+  cost:
+    Telecrystal: 1
+  categories:
+  - UplinkAmmo
 
 - type: listing
   id: UplinkBox8GaugeSarin
@@ -1288,38 +1256,6 @@
       tags:
       - NukeOpsUplink
       - ContravendUplink
-
-- type: listing
-  id: UplinkReinforcementRadioSyndicateCyborgSaboteur
-  name:  uplink-reinforcement-radio-cyborg-saboteur-name
-  description: uplink-reinforcement-radio-cyborg-saboteur-desc
-  productEntity: ReinforcementRadioSyndicateCyborgSaboteur
-  icon: { sprite: /Textures/_Goobstation/Actions/actions_borg.rsi, state: old-radio-borg-saboteur }
-  cost:
-    Telecrystal: 150
-  categories:
-  - UplinkAllies
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink
-
-- type: listing
-  id: UplinkMedborg
-  name: uplink-medborg-name
-  description: uplink-medborg-desc
-  icon: { sprite: /Textures/Mobs/Silicon/chassis.rsi, state: synd_medical_icon }
-  productEntity: ReinforcementRadioSyndicateCyborgMed
-  cost:
-    Telecrystal: 200
-  categories:
-  - UplinkAllies
-  conditions:
-  - !type:StoreWhitelistCondition
-    whitelist:
-      tags:
-      - NukeOpsUplink # we dont want traitors rolling this in their surpluses tbh
 
 # Martial Arts
 - type: listing
@@ -1419,17 +1355,6 @@
 
 - type: listing
   id: UplinkRPOA
-  name: uplink-ExplosivePayloadBlueprint-name
-  description: uplink-ExplosivePayloadBlueprint-desc
-  productEntity: BlueprintExplosivePayload
-  icon: { sprite: _Goobstation/Objects/Devices/payload.rsi, state: icon }
-  cost:
-    Telecrystal: 40 #Should be alot, its an investment item
-  categories:
-  - UplinkExplosives
-
-- type: listing
-  id: UplinkExplosivePayloadBlueprint
   name: uplink-RPOA-name
   description: uplink-RPOA-desc
   productEntity: WeaponLauncherRocketDisposableThermobaric
@@ -1511,16 +1436,5 @@
   productEntity: BloodredCasette
   cost:
     Telecrystal: 3
-  categories:
-  - UplinkPointless
-
-- type: listing
-  id: UplinkSyndiedrobe
-  name: uplink-syndiedrobe-name
-  description: uplink-syndiedrobe-desc
-  icon: { sprite: Structures/Machines/VendingMachines/syndiedrobe.rsi, state: off }
-  productEntity: VendingMachineSyndieDrobe
-  cost:
-    Telecrystal: 40
   categories:
   - UplinkPointless

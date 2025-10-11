@@ -35,7 +35,6 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -63,7 +62,6 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -89,7 +87,6 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -115,7 +112,6 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -141,7 +137,6 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -167,7 +162,6 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -193,7 +187,6 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon
 
 - type: entity
   parent: ClothingNeckBase
@@ -221,4 +214,3 @@
   - type: Tag
     tags:
       - Medal
-      - WhitelistChameleon

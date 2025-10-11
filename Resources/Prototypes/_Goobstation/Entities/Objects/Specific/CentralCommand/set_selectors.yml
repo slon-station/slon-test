@@ -30,7 +30,7 @@
     - BSORevolverSet
     - BSOCQCSet
     - BSOChesterSet
-    # - BSOSyringeSet # Slon - no fuck you it's not a weapon
+    - BSOSyringeSet
     maxSelectedSets: 2
 
 

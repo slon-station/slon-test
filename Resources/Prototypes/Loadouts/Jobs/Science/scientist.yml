@@ -103,12 +103,10 @@
   equipment:
     head: ClothingHeadHatCorpsoft
 
-
 - type: loadout
   id: SkullBandana
   equipment:
     head: ClothingHeadBandSkull
-
 
 # Neck
 
@@ -123,24 +121,20 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitScientist
 
-
 - type: loadout
   id: ScientistJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtScientist
-
 
 - type: loadout
   id: RoboticistJumpsuit
   equipment:
     jumpsuit: ClothingUniformJumpsuitRoboticist
 
-
 - type: loadout
   id: RoboticistJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtRoboticist
-
 
 - type: loadout
   id: SeniorResearcherJumpsuit
@@ -162,7 +156,6 @@
   id: ResearchMJ
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryScientist
-
 
 # Back
 - type: loadout
@@ -220,12 +213,10 @@
   equipment:
     gloves: ClothingHandsGlovesLatex
 
-
 - type: loadout
   id: RobohandsGloves
   equipment:
     gloves: ClothingHandsGlovesRobohands
-
 
 # Shoes
 - type: loadout

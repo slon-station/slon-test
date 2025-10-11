@@ -5,9 +5,6 @@
 // SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 plykiya <plykiya@protonmail.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 mhamster <81412348+mhamsterr@users.noreply.github.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -31,8 +28,8 @@ public sealed partial class ChameleonMenu : DefaultWindow
     private readonly SpriteSystem _sprite;
     public event Action<string>? OnIdSelected;
 
-    private IEnumerable<EntProtoId> _possibleIds = [];
-    private EntProtoId? _selectedId;
+    private IEnumerable<string> _possibleIds = Enumerable.Empty<string>();
+    private string? _selectedId;
     private string _searchFilter = "";
 
     public ChameleonMenu()
@@ -44,7 +41,7 @@ public sealed partial class ChameleonMenu : DefaultWindow
         Search.OnTextChanged += OnSearchEntered;
     }
 
-    public void UpdateState(IEnumerable<EntProtoId> possibleIds, string? selectedId)
+    public void UpdateState(IEnumerable<string> possibleIds, string? selectedId)
     {
         _possibleIds = possibleIds;
         _selectedId = selectedId;
@@ -69,7 +66,7 @@ public sealed partial class ChameleonMenu : DefaultWindow
             if (!_prototypeManager.TryIndex(id, out EntityPrototype? proto))
                 continue;
 
-            var lowId = id.Id.ToLowerInvariant();
+            var lowId = id.ToLowerInvariant();
             var lowName = proto.Name.ToLowerInvariant();
             if (!lowId.Contains(searchFilterLow) && !lowName.Contains(_searchFilter))
                 continue;

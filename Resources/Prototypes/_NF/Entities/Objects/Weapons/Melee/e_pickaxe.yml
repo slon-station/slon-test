@@ -40,7 +40,7 @@
     - Belt
     - back
     - suitStorage
-  - type: ToggleableVisuals
+  - type: ToggleableLightVisuals
     spriteLayer: blade
     inhandVisuals:
       left:
@@ -69,3 +69,4 @@
       groups:
         Brute: 3
     heavyStaminaCost: 5
+    clickPartDamageMultiplier: 1

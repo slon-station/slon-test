@@ -21,6 +21,7 @@
 // SPDX-FileCopyrightText: 2024 Plykiya <58439124+Plykiya@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 Redfire1331 <125223432+Redfire1331@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 Rouge2t7 <81053047+Sarahon@users.noreply.github.com>
+// SPDX-FileCopyrightText: 2024 Tayrtahn <tayrtahn@gmail.com>
 // SPDX-FileCopyrightText: 2024 Truoizys <153248924+Truoizys@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 TsjipTsjip <19798667+TsjipTsjip@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 Ubaser <134914314+UbaserB@users.noreply.github.com>
@@ -37,11 +38,6 @@
 // SPDX-FileCopyrightText: 2024 slarticodefast <161409025+slarticodefast@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 Арт <123451459+JustArt1m@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 Skubman <ba.fallaria@gmail.com>
-// SPDX-FileCopyrightText: 2025 Tayrtahn <tayrtahn@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -60,8 +56,8 @@ public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
 {
     [Dependency] private readonly IGameTiming _timing = default!;
     [Dependency] private readonly AnimationPlayerSystem _animation = default!;
-    [Dependency] private readonly IComponentFactory _factory = default!; // EE Plasmamen Change
     [Dependency] private readonly SpriteSystem _sprite = default!;
+
     /// <summary>
     /// It's a little on the long side but given we use multiple colours denoting what happened it makes it easier to register.
     /// </summary>
@@ -77,13 +73,12 @@ public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
         SubscribeLocalEvent<ColorFlashEffectComponent, AnimationCompletedEvent>(OnEffectAnimationCompleted);
     }
 
-    // EE Plasmamen Change
-    public override void RaiseEffect(Color color, List<EntityUid> entities, Filter filter, float? animationLength = null)
+    public override void RaiseEffect(Color color, List<EntityUid> entities, Filter filter)
     {
         if (!_timing.IsFirstTimePredicted)
             return;
 
-        OnColorFlashEffect(new ColorFlashEffectEvent(color, GetNetEntityList(entities), animationLength)); // EE Plasmamen Change
+        OnColorFlashEffect(new ColorFlashEffectEvent(color, GetNetEntityList(entities)));
     }
 
     private void OnEffectAnimationCompleted(EntityUid uid, ColorFlashEffectComponent component, AnimationCompletedEvent args)
@@ -119,8 +114,7 @@ public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
         }
     }
 
-    // EE Plasmamen Change
-    private Animation? GetDamageAnimation(EntityUid uid, Color color, SpriteComponent? sprite = null, float? animationLength = null)
+    private Animation? GetDamageAnimation(EntityUid uid, Color color, SpriteComponent? sprite = null)
     {
         if (!Resolve(uid, ref sprite, false))
             return null;
@@ -128,7 +122,7 @@ public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
         // 90% of them are going to be this so why allocate a new class.
         return new Animation
         {
-            Length = TimeSpan.FromSeconds(animationLength ?? AnimationLength), // EE Plasmamen Change
+            Length = TimeSpan.FromSeconds(AnimationLength),
             AnimationTracks =
             {
                 new AnimationTrackComponentProperty
@@ -139,7 +133,7 @@ public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
                     KeyFrames =
                     {
                         new AnimationTrackProperty.KeyFrame(color, 0f),
-                        new AnimationTrackProperty.KeyFrame(sprite.Color, animationLength ?? AnimationLength) // EE Plasmamen Change
+                        new AnimationTrackProperty.KeyFrame(sprite.Color, AnimationLength)
                     }
                 }
             }
@@ -159,29 +153,6 @@ public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
                 continue;
             }
 
-            // EE Plasmamen Change Start
-            if (!TryComp(ent, out AnimationPlayerComponent? player))
-            {
-                player = (AnimationPlayerComponent) _factory.GetComponent(typeof(AnimationPlayerComponent));
-                player.Owner = ent;
-                player.NetSyncEnabled = false;
-                AddComp(ent, player);
-            }
-
-            // Need to stop the existing animation first to ensure the sprite color is fixed.
-            // Otherwise we might lerp to a red colour instead.
-            if (_animation.HasRunningAnimation(ent, player, AnimationKey))
-                _animation.Stop(ent, player, AnimationKey);
-
-            if (TryComp<ColorFlashEffectComponent>(ent, out var effect))
-                sprite.Color = effect.Color;
-
-            var animation = GetDamageAnimation(ent, color, sprite, ev.AnimationLength);
-
-            if (animation == null)
-                continue;
-            // EE Plasmamen Change End
-
             if (!TryComp(ent, out ColorFlashEffectComponent? comp))
             {
 #if DEBUG
@@ -190,6 +161,7 @@ public sealed class ColorFlashEffectSystem : SharedColorFlashEffectSystem
             }
 
             _animation.Stop(ent, AnimationKey);
+            var animation = GetDamageAnimation(ent, color, sprite);
 
             if (animation == null)
             {

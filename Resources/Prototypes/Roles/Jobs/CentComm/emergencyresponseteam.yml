@@ -185,14 +185,6 @@
     - ERTSecurityUndeterminedWeapon
     # Goobstation - MagazineMagnum
 
-- type: chameleonOutfit
-  id: ERTLeaderChameleonOutfit
-  job: ERTLeader
-  hasMindShield: true
-  equipment:
-    head: ClothingHeadHelmetHardsuitERTLeader
-    neck: ClothingNeckBronzeheart
-
 # Chaplain
 - type: job
   id: ERTChaplain
@@ -284,16 +276,6 @@
     - Nullrod # Goobstation
     - ExecutiveIDCard # Goobstation - Executive Access!
 
-- type: chameleonOutfit
-  id: ERTChaplainChameleonOutfit
-  job: ERTChaplain
-  hasMindShield: true
-  equipment:
-    head: ClothingHeadHelmetHardsuitERTChaplain
-    mask: ClothingMaskGasERT
-    outerClothing: ClothingOuterHardsuitERTChaplain
-    shoes: ClothingShoesBootsMagAdv
-
 # Engineer
 - type: job
   id: ERTEngineer
@@ -374,14 +356,6 @@
     - SheetSteel
     - SheetGlass
 
-- type: chameleonOutfit
-  id: ERTEngineerChameleonOutfit
-  job: ERTEngineer
-  hasMindShield: true
-  equipment:
-    head: ClothingHeadHelmetHardsuitERTEngineer
-    neck: ClothingNeckEngineermedal
-
 # Security
 - type: job
   id: ERTSecurity
@@ -389,7 +363,7 @@
   description: job-description-ertsecurity
   playTimeTracker: JobERTSecurity
   setPreference: false
-  startingGear: ERTSecurityGearEVA
+  startingGear: ERTEngineerGearEVA
   icon: "JobIconNanotrasen"
   supervisors: job-supervisors-centcom
   canBeAntag: false
@@ -481,14 +455,6 @@
 #    - CrowbarRed
 #    - MagazinePistol
 
-- type: chameleonOutfit
-  id: ERTSecurityChameleonOutfit
-  job: ERTSecurity
-  hasMindShield: true
-  equipment:
-    head: ClothingHeadHelmetHardsuitERTSecurity
-    neck: ClothingNeckSecuritymedal
-
 # Medical
 - type: job
   id: ERTMedical
@@ -567,14 +533,6 @@
     - CartridgeAtropine
     - MedicalBeamGunBattery
 
-- type: chameleonOutfit
-  id: ERTMedicalChameleonOutfit
-  job: ERTMedical
-  hasMindShield: true
-  equipment:
-    head: ClothingHeadHelmetHardsuitERTMedical
-    neck: ClothingNeckStethoscope
-
 # Janitor
 - type: job
   id: ERTJanitor
@@ -642,12 +600,3 @@
     - Soap
     - CrowbarRed
     - AdvMopItem
-
-- type: chameleonOutfit
-  id: ERTJanitorChameleonOutfit
-  job: ERTJanitor
-  hasMindShield: true
-  equipment:
-    head: ClothingHeadHelmetHardsuitERTJanitor
-    neck: ClothingNeckScarfStripedPurple
-    eyes: ClothingEyesGlassesSunglasses

@@ -1,6 +1,4 @@
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 cheetah1984 <davidc71114@gmail.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 deltanedas <@deltanedas:kde.org>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
@@ -149,13 +147,13 @@ public sealed partial class RoboticArmComponent : Component
     /// Power used when idle.
     /// </summary>
     [DataField]
-    public float IdlePowerDraw = 100f;
+    public float IdlePowerDraw = 50f;
 
     /// <summary>
     /// Power used when moving items.
     /// </summary>
     [DataField]
-    public float MovingPowerDraw = 500f;
+    public float MovingPowerDraw = 3000f;
 
     #endregion
 }

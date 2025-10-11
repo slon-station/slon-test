@@ -5,7 +5,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using Content.Shared.Actions;
-using Content.Shared.Actions.Components;
 using Content.Shared.Mind;
 using Content.Shared.Polymorph;
 using Robust.Shared.Audio;
@@ -46,7 +45,7 @@ public sealed partial class PossessedComponent : Component
     public Container PossessedContainer;
 
     [DataField]
-    public EntProtoId<ActionComponent> EndPossessionAction = "ActionEndPossession";
+    public EntProtoId<InstantActionComponent> EndPossessionAction = "ActionEndPossession";
 
     [DataField]
     public bool HideActions = true;

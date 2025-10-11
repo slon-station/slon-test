@@ -33,19 +33,10 @@ public sealed class ProjectileAnomalySystem : EntitySystem
     [Dependency] private readonly IMapManager _mapManager = default!;
     [Dependency] private readonly GunSystem _gunSystem = default!;
 
-    private EntityQuery<TransformComponent> _xFormQuery;
-    private EntityQuery<MobStateComponent> _mobQuery;
-
-    /// <summary> Pre-allocated collection for calculating entities in range. </summary>
-    private readonly HashSet<EntityUid> _inRange = new();
-
     public override void Initialize()
     {
         SubscribeLocalEvent<ProjectileAnomalyComponent, AnomalyPulseEvent>(OnPulse);
         SubscribeLocalEvent<ProjectileAnomalyComponent, AnomalySupercriticalEvent>(OnSupercritical);
-
-        _xFormQuery = GetEntityQuery<TransformComponent>();
-        _mobQuery = GetEntityQuery<MobStateComponent>();
     }
 
     private void OnPulse(EntityUid uid, ProjectileAnomalyComponent component, ref AnomalyPulseEvent args)
@@ -60,20 +51,17 @@ public sealed class ProjectileAnomalySystem : EntitySystem
 
     private void ShootProjectilesAtEntities(EntityUid uid, ProjectileAnomalyComponent component, float severity)
     {
-        var projectileCount = (int)MathF.Round(MathHelper.Lerp(component.MinProjectiles, component.MaxProjectiles, severity));
+        var projectileCount = (int) MathF.Round(MathHelper.Lerp(component.MinProjectiles, component.MaxProjectiles, severity));
+        var xformQuery = GetEntityQuery<TransformComponent>();
+        var mobQuery = GetEntityQuery<MobStateComponent>();
+        var xform = xformQuery.GetComponent(uid);
 
-        var xform = _xFormQuery.GetComponent(uid);
-
-        _inRange.Clear();
-        _lookup.GetEntitiesInRange(uid, component.ProjectileRange * severity, _inRange, LookupFlags.Dynamic);
-
-        if (_inRange.Count == 0)
-            return;
-
+        var inRange = _lookup.GetEntitiesInRange(uid, component.ProjectileRange * severity, LookupFlags.Dynamic).ToList();
+        _random.Shuffle(inRange);
         var priority = new List<EntityUid>();
-        foreach (var entity in _inRange)
+        foreach (var entity in inRange)
         {
-            if (_mobQuery.HasComponent(entity))
+            if (mobQuery.HasComponent(entity))
                 priority.Add(entity);
         }
 
@@ -81,20 +69,17 @@ public sealed class ProjectileAnomalySystem : EntitySystem
         while (projectileCount > 0)
         {
             Log.Debug($"{projectileCount}");
-            var target = priority.Count > 0
+            var target = priority.Any()
                 ? _random.PickAndTake(priority)
-                : _random.Pick(_inRange);
+                : _random.Pick(inRange);
 
-            var targetXForm= _xFormQuery.GetComponent(target);
-            var targetCoords = targetXForm.Coordinates.Offset(_random.NextVector2(0.5f));
+            var targetCoords = xformQuery.GetComponent(target).Coordinates.Offset(_random.NextVector2(0.5f));
 
             ShootProjectile(
-                uid,
-                component,
+                uid, component,
                 xform.Coordinates,
                 targetCoords,
-                severity
-            );
+                severity);
             projectileCount--;
         }
     }
@@ -104,8 +89,7 @@ public sealed class ProjectileAnomalySystem : EntitySystem
         ProjectileAnomalyComponent component,
         EntityCoordinates coords,
         EntityCoordinates targetCoords,
-        float severity
-    )
+        float severity)
     {
         var mapPos = _xform.ToMapCoordinates(coords);
 

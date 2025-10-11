@@ -3,10 +3,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-# Slon - lol no
-
-#- type: guideEntry
-#  id: Conditions
-#  name: "Antag Revealing Conditions"
-#  priority: 60
-#  text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/MetaReveal.xml"
+- type: guideEntry
+  id: Conditions
+  name: "Antag Revealing Conditions"
+  priority: 60
+  text: "/ServerInfo/_Goobstation/Guidebook/Antagonist/MetaReveal.xml"

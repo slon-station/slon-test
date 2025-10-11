@@ -242,7 +242,6 @@
     - id: EnergySpeedloaderLethal
     - id: EnergySpeedloaderLethal
     - id: EnergySpeedloaderDisabler
-    - id: EnergySpeedloaderDisabler
 
 - type: entity
   id: ClothingBeltMilitaryRigGrenadierFilled

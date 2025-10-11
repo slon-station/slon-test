@@ -1,10 +1,3 @@
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 deltanedas <39013340+deltanedas@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 metalgearsloth <31366439+metalgearsloth@users.noreply.github.com>
-//
-// SPDX-License-Identifier: AGPL-3.0-or-later
-
 using Content.Client.Actions;
 using Content.Shared.Actions;
 using Content.Shared.Charges.Components;
@@ -32,14 +25,16 @@ public sealed class ChargesSystem : SharedChargesSystem
 
         while (query.MoveNext(out var uid, out var recharge, out var charges))
         {
-            if (_actions.GetAction(uid, false) is not {} action)
+            BaseActionComponent? actionComp = null;
+
+            if (!_actions.ResolveActionData(uid, ref actionComp, logError: false))
                 continue;
 
             var current = GetCurrentCharges((uid, charges, recharge));
 
             if (!_lastCharges.TryGetValue(uid, out var last) || current != last)
             {
-                _actions.UpdateAction(action);
+                _actions.UpdateAction(uid, actionComp);
             }
 
             _tempLastCharges[uid] = current;

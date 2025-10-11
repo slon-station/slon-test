@@ -56,13 +56,9 @@
   components:
   - type: Sprite
     state: eyes-sechud
-  - type: Organ
-    onAdd:
-    - type: ShowJobIcons
-    - type: ShowMindShieldIcons
-    - type: ShowCriminalRecordIcons
-    - type: FlashImmunity
-    - type: EyeProtection
+  - type: ShowJobIcons
+  - type: ShowMindShieldIcons
+  - type: ShowCriminalRecordIcons
 
 - type: entity
   parent: BasicCyberneticEyes
@@ -72,14 +68,12 @@
   components:
   - type: Sprite
     state: eyes-medhud
-  - type: Organ
-    onAdd:
-    - type: ShowHealthBars
-      damageContainers:
-      - Biological
-    - type: ShowHealthIcons
-      damageContainers:
-      - Biological
+  - type: ShowHealthBars
+    damageContainers:
+    - Biological
+  - type: ShowHealthIcons
+    damageContainers:
+    - Biological
 
 - type: entity
   parent: BasicCyberneticEyes
@@ -89,18 +83,16 @@
   components:
   - type: Sprite
     state: eyes-diagnostic
-  - type: Organ
-    onAdd:
-    - type: ShowHealthBars
-      damageContainers:
-      - Inorganic
-      - Silicon
-      - SiliconRadiation
-    - type: ShowHealthIcons
-      damageContainers:
-      - Inorganic
-      - Silicon
-      - SiliconRadiation
+  - type: ShowHealthBars
+    damageContainers:
+    - Inorganic
+    - Silicon
+    - SiliconRadiation
+  - type: ShowHealthIcons
+    damageContainers:
+    - Inorganic
+    - Silicon
+    - SiliconRadiation
 
 # Heart
 
@@ -121,9 +113,6 @@
       Damaged: 9
       Destroyed: 0
     slotId: heart
-    onAdd:
-    - type: StaminaModifier
-      modifier: 1.35
   - type: Metabolizer
     maxPoisonsProcessable: 2
     metabolizerTypes: [ Cybernetic ]
@@ -158,9 +147,6 @@
       Damaged: 9
       Destroyed: 0
     slotId: heart
-    onAdd:
-    - type: StaminaModifier
-      modifier: 1.7
   - type: Metabolizer
     maxPoisonsProcessable: 2
     metabolizerTypes: [ Cybernetic ]
@@ -251,7 +237,7 @@
   parent: BasicCyberneticLungs
   id: UpgradedCyberneticLungs
   name: upgraded cybernetic lungs
-  description: A self-contained respiratory system that eliminates the need to breathe entirely and grants increased stamina recovery.
+  description: A self-contained respiratory system that eliminates the need to breathe entirely and grants full immunity to atmospheric pressure extremes.
   components:
   - type: Sprite
     layers:
@@ -266,5 +252,5 @@
       Destroyed: 0
     slotId: lungs
     onAdd:
-    - type: StaminaRegeneration
-      regenerationRate: -3.0
+    - type: BreathingImmunity
+    - type: PressureImmunity

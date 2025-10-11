@@ -31,7 +31,7 @@
     ports:
       - MaterialSilo
   - type: Machine
-    board: MaterialSiloMachineCircuitboard
+    board: MaterialSiloCircuitboard
   - type: Appearance
   - type: MaterialStorage
     ignoreColor: true

@@ -2,10 +2,10 @@
 // SPDX-FileCopyrightText: 2024 Danger Revolution! <142105406+DangerRevolution@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 Timemaster99 <57200767+Timemaster99@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
+// SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
 // SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
@@ -18,60 +18,45 @@ using Content.Client._EinsteinEngines.Flight.Components;
 namespace Content.Client._EinsteinEngines.Flight;
 public sealed class FlightSystem : SharedFlightSystem
 {
+    [Dependency] private readonly IEntityManager _entityManager = default!;
     public override void Initialize()
     {
         base.Initialize();
 
-        SubscribeLocalEvent<ToggleFlightVisualsEvent>(OnToggleFlightVisuals); // We need this crap because standingsys only raises shit on server lmao
-        SubscribeLocalEvent<FlightComponent, FlightEvent>(OnFlight);
+        SubscribeNetworkEvent<FlightEvent>(OnFlight);
+
     }
 
-    private void OnToggleFlightVisuals(ToggleFlightVisualsEvent args)
+    private void OnFlight(FlightEvent args)
     {
-        if (!TryGetEntity(args.Uid, out var uid)
-            || !TryComp<FlightComponent>(uid, out var flight))
-            return;
-
-        HandleFlightToggle(uid.Value, flight, args.IsFlying, args.IsAnimated);
-    }
-
-    private void OnFlight(EntityUid uid, FlightComponent component, FlightEvent args) =>
-        HandleFlightToggle(uid, component, args.IsFlying, component.IsAnimated);
-
-    private void HandleFlightToggle(EntityUid uid,
-        FlightComponent component,
-        bool isFlying,
-        bool isAnimated)
-    {
-        if (!TryComp<SpriteComponent>(uid, out var sprite)
-            || !isAnimated)
+        var uid = GetEntity(args.Uid);
+        if (!_entityManager.TryGetComponent(uid, out SpriteComponent? sprite)
+            || !args.IsAnimated
+            || !_entityManager.TryGetComponent(uid, out FlightComponent? flight))
             return;
 
         int? targetLayer = null;
-        if (component.IsLayerAnimated && component.Layer is not null)
+        if (flight.IsLayerAnimated && flight.Layer is not null)
         {
-            targetLayer = GetAnimatedLayer(uid, component.Layer, sprite);
+            targetLayer = GetAnimatedLayer(uid, flight.Layer, sprite);
             if (targetLayer == null)
                 return;
         }
 
-        if (isFlying
-            && isAnimated
-            && component.AnimationKey != "default"
-            && !HasComp<FlightVisualsComponent>(uid))
+        if (args.IsFlying && args.IsAnimated && flight.AnimationKey != "default")
         {
             var comp = new FlightVisualsComponent
             {
-                AnimateLayer = component.IsLayerAnimated,
-                AnimationKey = component.AnimationKey,
-                Multiplier = component.ShaderMultiplier,
-                Offset = component.ShaderOffset,
-                Speed = component.ShaderSpeed,
+                AnimateLayer = flight.IsLayerAnimated,
+                AnimationKey = flight.AnimationKey,
+                Multiplier = flight.ShaderMultiplier,
+                Offset = flight.ShaderOffset,
+                Speed = flight.ShaderSpeed,
                 TargetLayer = targetLayer,
             };
             AddComp(uid, comp);
         }
-        if (!isFlying)
+        if (!args.IsFlying)
             RemComp<FlightVisualsComponent>(uid);
     }
 

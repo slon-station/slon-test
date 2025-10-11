@@ -12,7 +12,6 @@
 
 using Content.Server.ParticleAccelerator.Components;
 using Content.Server.Singularity.Components;
-using Content.Shared.ParticleAccelerator.Components;
 using Content.Shared.Projectiles;
 using Content.Shared.Singularity.Components;
 using Robust.Shared.Physics.Components;

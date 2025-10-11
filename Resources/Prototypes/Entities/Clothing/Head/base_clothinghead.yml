@@ -169,9 +169,7 @@
   - type: Item
     heldPrefix: off
     size: Normal
-  - type: ToggleableVisuals
-    spriteLayer: light
-  - type: ItemTogglePointLight
+  - type: ToggleableLightVisuals
   - type: PointLight
     enabled: false
     radius: 3
@@ -198,8 +196,8 @@
         id: blinking
         interpolate: Nearest
         maxDuration: 1.0
-        startValue: 0.1
-        endValue: 2.0
+        minValue: 0.1
+        maxValue: 2.0
         isLooped: true
   - type: PowerCellSlot
     cellSlotId: cell_slot
@@ -230,9 +228,6 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.2
     coolingCoefficient: 0.2
-  - type: IgniteFromGasImmunity # EE Plasmeme Change
-    parts:
-    - Head
   - type: IngestionBlocker
   - type: Clothing
     #Copies ClothingHeadHardsuitBase behavior
@@ -244,7 +239,6 @@
     tags:
     - WhitelistChameleon
     - HelmetEVA
-    - PlasmamanSafe # EE Plasmeme Change
   - type: IdentityBlocker
   - type: HideLayerClothing
     slots:
@@ -280,11 +274,6 @@
   - type: TemperatureProtection
     heatingCoefficient: 0.1
     coolingCoefficient: 0.1
-  - type: FireProtection # EE Plasmeme Change
-    reduction: 0.2
-  - type: IgniteFromGasImmunity
-    parts:
-    - Head
   - type: Armor
     coverage:
     - Head
@@ -306,7 +295,6 @@
   - type: Tag
     tags:
     - WhitelistChameleon
-    - PlasmamanSafe # EE Plasmeme Change
   - type: IdentityBlocker
   - type: HideLayerClothing
     slots:
@@ -333,9 +321,7 @@
       map: [ "light" ]
   - type: Clothing
     equippedPrefix: off
-  - type: ToggleableVisuals
-    spriteLayer: light
-  - type: ItemTogglePointLight
+  - type: ToggleableLightVisuals
   - type: PointLight
     enabled: false
     radius: 3
@@ -362,8 +348,8 @@
         id: blinking
         interpolate: Nearest
         maxDuration: 1.0
-        startValue: 0.1
-        endValue: 2.0
+        minValue: 0.1
+        maxValue: 2.0
         isLooped: true
   - type: Battery
     maxCharge: 600 #lights drain 3/s but recharge of 2 makes this 1/s. Therefore 600 is 10 minutes of light.

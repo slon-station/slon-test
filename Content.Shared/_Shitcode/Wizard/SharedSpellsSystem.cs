@@ -94,7 +94,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Serialization;
 using Robust.Shared.Timing;
-using Content.Shared.Actions.Components;
 
 namespace Content.Shared._Goobstation.Wizard;
 
@@ -141,7 +140,6 @@ public abstract class SharedSpellsSystem : EntitySystem
     [Dependency] private   readonly SharedWizardTeleportSystem _teleport = default!;
     [Dependency] private   readonly PullingSystem _pulling = default!;
     [Dependency] private   readonly MobThresholdSystem _threshold = default!;
-    [Dependency] private   readonly TurfSystem _turf = default!;
 
     #endregion
 
@@ -528,11 +526,13 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        if (!Hands.TryGetActiveItem(ev.Performer, out var item))
+        if (!TryComp(ev.Performer, out HandsComponent? hands) || hands.ActiveHandEntity == null)
         {
             Popup(ev.Performer, "spell-fail-no-held-entity");
             return;
         }
+
+        var item = hands.ActiveHandEntity.Value;
 
         if (HasComp<UnremoveableComponent>(item) || !HasComp<ItemComponent>(item))
         {
@@ -546,7 +546,7 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         }
 
-        BindSoul(ev, item.Value, mind, mindComponent);
+        BindSoul(ev, item, mind, mindComponent);
         ev.Handled = true;
     }
 
@@ -632,7 +632,7 @@ public abstract class SharedSpellsSystem : EntitySystem
                 velocity,
                 ev.ProjectileSpeed,
                 true,
-                TransformSystem.ToMapCoordinates(ev.Target));
+                ev.Coords == null ? null : TransformSystem.ToMapCoordinates(ev.Coords.Value));
         }
 
         ev.Handled = true;
@@ -658,10 +658,10 @@ public abstract class SharedSpellsSystem : EntitySystem
             return;
         spellCardsAction.UsesLeft--;
         if (spellCardsAction.UsesLeft > 0)
-            Actions.SetUseDelay(ev.Action.Owner, TimeSpan.FromSeconds(0.5));
+            Actions.SetUseDelay(ev.Action, TimeSpan.FromSeconds(0.5));
         else
         {
-            Actions.SetUseDelay(ev.Action.Owner, spellCardsAction.UseDelay);
+            Actions.SetUseDelay(ev.Action, spellCardsAction.UseDelay);
             spellCardsAction.UsesLeft = spellCardsAction.CastAmount;
             RaiseNetworkEvent(new StopTargetingEvent(), ev.Performer);
         }
@@ -776,10 +776,12 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!TryComp(ev.Action, out InstantSummonsActionComponent? summons))
             return;
 
-        if (!Hands.TryGetActiveItem(ev.Performer, out var held))
+        if (!TryComp(ev.Performer, out HandsComponent? hands))
             return;
 
-        if ( held == summons.Entity)
+        var held = hands.ActiveHandEntity;
+
+        if (held != null && held == summons.Entity)
             return;
 
         bool ItemValid([NotNullWhen(true)] EntityUid? item)
@@ -849,7 +851,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         TransformSystem.SetMapCoordinates(item, TransformSystem.GetMapCoordinates(ev.Performer));
         TransformSystem.AttachToGridOrMap(item);
 
-        Hands.TryForcePickupAnyHand(ev.Performer, item);
+        Hands.TryForcePickupAnyHand(ev.Performer, item, handsComp: hands);
     }
 
     private void OnTeleport(WizardTeleportEvent ev)
@@ -888,7 +890,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         {
             var (coords, tile) = data;
 
-            if (_turf.IsSpace(tile))
+            if (tile.IsSpace())
                 return false;
 
             var trapQuery = GetEntityQuery<WizardTrapComponent>();
@@ -951,31 +953,33 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (ev.Handled || !_magic.PassesSpellPrerequisites(ev.Action, ev.Performer))
             return;
 
-        if (!Hands.TryGetActiveItem(ev.Performer, out var held))
+        if (!TryComp(ev.Performer, out HandsComponent? hands))
             return;
 
-        if (!HasComp<ItemComponent>(held))
+        if (!HasComp<ItemComponent>(hands.ActiveHandEntity))
         {
             Popup(ev.Performer, "spell-fail-sanguine-strike-no-item");
             return;
         }
 
-        if (HasComp<VirtualItemComponent>(held))
+        var item = hands.ActiveHandEntity.Value;
+
+        if (HasComp<VirtualItemComponent>(item))
             return;
 
-        if (HasComp<SanguineStrikeComponent>(held))
+        if (HasComp<SanguineStrikeComponent>(item))
         {
             Popup(ev.Performer, "spell-fail-sanguine-strike-already-empowered");
             return;
         }
 
-        if (!TryComp(held, out MeleeWeaponComponent? weapon) || weapon.Damage.GetTotal() == FixedPoint2.Zero)
+        if (!TryComp(item, out MeleeWeaponComponent? weapon) || weapon.Damage.GetTotal() == FixedPoint2.Zero)
         {
-            PopupLoc(ev.Performer, Loc.GetString("spell-fail-sanguine-strike-not-weapon", ("item", held)));
+            PopupLoc(ev.Performer, Loc.GetString("spell-fail-sanguine-strike-not-weapon", ("item", item)));
             return;
         }
 
-        AddComp<SanguineStrikeComponent>(held.Value);
+        AddComp<SanguineStrikeComponent>(item);
 
         ev.Handled = true;
     }
@@ -1158,7 +1162,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!TryComp(ev.Performer, out HandsComponent? hands))
             return;
 
-        foreach (var item in Hands.EnumerateHeld((ev.Performer, hands)))
+        foreach (var item in Hands.EnumerateHeld(ev.Performer, hands))
         {
             if (Tag.HasAnyTag(item, ev.RechargeTags) &&
                 TryComp<BasicEntityAmmoProviderComponent>(item, out var basicAmmoComp) &&
@@ -1294,8 +1298,8 @@ public abstract class SharedSpellsSystem : EntitySystem
     {
         var magicQuery = GetEntityQuery<MagicComponent>();
         var ents = except != null
-            ? Actions.GetActions(uid).Where(x => x.Owner != except.Value && magicQuery.HasComp(x.Owner))
-            : Actions.GetActions(uid).Where(x => magicQuery.HasComp(x.Owner));
+            ? Actions.GetActions(uid).Where(x => x.Id != except.Value && magicQuery.HasComp(x.Id))
+            : Actions.GetActions(uid).Where(x => magicQuery.HasComp(x.Id));
         var hasSpells = false;
         foreach (var (ent, _) in ents)
         {
@@ -1350,7 +1354,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!TryComp(user, out HandsComponent? hands))
             return null;
 
-        if (!Hands.TryGetEmptyHand((user, hands), out var hand))
+        if (!Hands.TryGetEmptyHand(user, out var hand, hands))
         {
             Popup(user, "spell-fail-hands-occupied");
             return null;
@@ -1360,7 +1364,7 @@ public abstract class SharedSpellsSystem : EntitySystem
             return null;
 
         var item = Spawn(proto, Transform(user).Coordinates);
-        if (Hands.TryPickup(user, item, hand, false))
+        if (Hands.TryPickup(user, item, hand, false, false, hands))
             return item;
 
         QueueDel(item);
@@ -1368,8 +1372,11 @@ public abstract class SharedSpellsSystem : EntitySystem
         return null;
     }
 
-    private bool ValidateLockOnAction(WorldTargetActionEvent ev)
+    private bool ValidateLockOnAction(EntityWorldTargetActionEvent ev)
     {
+        if (ev.Coords == null)
+            return false;
+
         if (!TryComp(ev.Action.Owner, out LockOnMarkActionComponent? lockOnMark))
             return false;
 
@@ -1379,7 +1386,7 @@ public abstract class SharedSpellsSystem : EntitySystem
         if (!HasComp<MobStateComponent>(ev.Entity.Value) || !HasComp<DamageableComponent>(ev.Entity.Value))
             return false;
 
-        return TransformSystem.InRange(ev.Target, xform.Coordinates, lockOnMark.LockOnRadius + 1f);
+        return TransformSystem.InRange(ev.Coords.Value, xform.Coordinates, lockOnMark.LockOnRadius + 1f);
     }
 
     private void Popup(EntityUid uid, string message, PopupType type = PopupType.Small)

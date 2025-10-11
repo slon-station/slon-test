@@ -9,9 +9,6 @@
 // SPDX-FileCopyrightText: 2024 VMSolidus <evilexecutive@gmail.com>
 // SPDX-FileCopyrightText: 2024 gluesniffler <159397573+gluesniffler@users.noreply.github.com>
 // SPDX-FileCopyrightText: 2025 Aiden <28298836+Aidenkrz@users.noreply.github.com>
-// SPDX-FileCopyrightText: 2025 GoobBot <uristmchands@proton.me>
-// SPDX-FileCopyrightText: 2025 SX-7 <sn1.test.preria.2002@gmail.com>
-// SPDX-FileCopyrightText: 2025 gluesniffler <linebarrelerenthusiast@gmail.com>
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
@@ -35,7 +32,7 @@ public abstract class SharedFloatingVisualizerSystem : EntitySystem
         SubscribeLocalEvent<FloatingVisualsComponent, ComponentStartup>(OnComponentStartup);
         SubscribeLocalEvent<GravityChangedEvent>(OnGravityChanged);
         SubscribeLocalEvent<FloatingVisualsComponent, EntParentChangedMessage>(OnEntParentChanged);
-        SubscribeLocalEvent<FloatingVisualsComponent, FlightEvent>(OnFlight);
+        SubscribeNetworkEvent<FlightEvent>(OnFlight);
     }
 
     /// <summary>
@@ -81,15 +78,18 @@ public abstract class SharedFloatingVisualizerSystem : EntitySystem
         }
     }
 
-    private void OnFlight(EntityUid uid, FloatingVisualsComponent component, FlightEvent args)
+    private void OnFlight(FlightEvent args)
     {
-        component.CanFloat = args.IsFlying;
+        var uid = GetEntity(args.Uid);
+        if (!TryComp<FloatingVisualsComponent>(uid, out var floating))
+            return;
+        floating.CanFloat = args.IsFlying;
 
         if (!args.IsFlying
             || !args.IsAnimated)
             return;
 
-        FloatAnimation(uid, component.Offset, component.AnimationKey, component.AnimationTime);
+        FloatAnimation(uid, floating.Offset, floating.AnimationKey, floating.AnimationTime);
     }
 
     private void OnEntParentChanged(EntityUid uid, FloatingVisualsComponent component, ref EntParentChangedMessage args)

@@ -148,7 +148,7 @@
     sprite: Objects/Weapons/Melee/stunbaton.rsi
     layers:
     - state: stunbaton_off
-      map: [ "enum.ToggleableVisuals.Layer" ]
+      map: [ "enum.ToggleVisuals.Layer" ]
   - type: Stunbaton
     energyPerUse: 50
     lightAttackEnergyMultiplier: 2 # Goob edit
@@ -182,10 +182,10 @@
     angle: 0
     animation: WeaponArcThrust
   # it was ~35 now it's 55 so it's a buff ig
-  - type: StaminaDamageOnHit # goob edited - Give Wideswingers a tiny bit of pity
+  - type: StaminaDamageOnHit # goob edited
     damage: 5
-    overtime: 25
-    lightAttackOvertimeDamageMultiplier: 2
+    overtime: 1
+    lightAttackOvertimeDamageMultiplier: 50
     sound: /Audio/Weapons/egloves.ogg
   - type: DelayedKnockdownOnHit # Goobstation
     useDelay: stunbaton
@@ -213,8 +213,8 @@
   - type: Appearance
   - type: GenericVisualizer
     visuals:
-     enum.ToggleableVisuals.Enabled:
-        enum.ToggleableVisuals.Layer:
+     enum.ToggleVisuals.Toggled:
+        enum.ToggleVisuals.Layer:
           True: {state: stunbaton_on}
           False: {state: stunbaton_off}
   - type: StaticPrice
@@ -302,9 +302,9 @@
       sprite: Objects/Weapons/Melee/flash.rsi
       layers:
       - state: flash
-        map: [ "enum.FlashVisualLayers.BaseLayer" ]
+        map: [ "enum.FlashVisuals.BaseLayer" ]
       - state: flashing
-        map: [ "enum.FlashVisualLayers.LightLayer" ]
+        map: [ "enum.FlashVisuals.LightLayer" ]
         visible: false
         shader: unshaded
     - type: Flash
@@ -320,27 +320,22 @@
       size: Small
       sprite: Objects/Weapons/Melee/flash.rsi
     - type: UseDelay
-      delay: 4 # has to be the same as the FlashingTime datafield in FlashComponent
-    - type: UseDelayOnMeleeHit
     - type: StaticPrice
       price: 40
     - type: Appearance
     - type: GenericVisualizer
       visuals:
         enum.FlashVisuals.Burnt:
-          enum.FlashVisualLayers.BaseLayer:
+          enum.FlashVisuals.BaseLayer:
             True: {state: burnt}
         enum.FlashVisuals.Flashing:
-          enum.FlashVisualLayers.LightLayer:
+          enum.FlashVisuals.LightLayer:
             True: {visible: true}
             False: {visible: false}
     - type: GuideHelp
       guides:
       - Security
       - Antagonists
-    - type: Tag
-      tags:
-      - Flash
 
 - type: entity
   name: flash

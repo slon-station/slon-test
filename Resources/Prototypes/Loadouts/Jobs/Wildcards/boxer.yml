@@ -80,12 +80,10 @@
   equipment:
     jumpsuit: UniformShortsRed
 
-
 - type: loadout
   id: BoxerShortsWithTop
   equipment:
     jumpsuit: UniformShortsRedWithTop
-
 
 # Gloves
 - type: loadout

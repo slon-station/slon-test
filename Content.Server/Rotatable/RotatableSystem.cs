@@ -54,13 +54,11 @@ namespace Content.Server.Rotatable
 
         private void AddFlipVerb(EntityUid uid, FlippableComponent component, GetVerbsEvent<Verb> args)
         {
-            if (!args.CanAccess
-                || !args.CanInteract
-                || !args.CanComplexInteract)
+            if (!args.CanAccess || !args.CanInteract)
                 return;
 
             // Check if the object is anchored.
-            if (TryComp(uid, out PhysicsComponent? physics) && physics.BodyType == BodyType.Static)
+            if (EntityManager.TryGetComponent(uid, out PhysicsComponent? physics) && physics.BodyType == BodyType.Static)
                 return;
 
             Verb verb = new()
@@ -79,20 +77,19 @@ namespace Content.Server.Rotatable
         {
             if (!args.CanAccess
                 || !args.CanInteract
-                || !args.CanComplexInteract
                 || Transform(uid).NoLocalRotation) // Good ol prototype inheritance, eh?
                 return;
 
             // Check if the object is anchored, and whether we are still allowed to rotate it.
             if (!component.RotateWhileAnchored &&
-                TryComp(uid, out PhysicsComponent? physics) &&
+                EntityManager.TryGetComponent(uid, out PhysicsComponent? physics) &&
                 physics.BodyType == BodyType.Static)
                 return;
 
             Verb resetRotation = new()
             {
                 DoContactInteraction = true,
-                Act = () => Comp<TransformComponent>(uid).LocalRotation = Angle.Zero,
+                Act = () => EntityManager.GetComponent<TransformComponent>(uid).LocalRotation = Angle.Zero,
                 Category = VerbCategory.Rotate,
                 Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/refresh.svg.192dpi.png")),
                 Text = "Reset",
@@ -104,7 +101,7 @@ namespace Content.Server.Rotatable
             // rotate clockwise
             Verb rotateCW = new()
             {
-                Act = () => Comp<TransformComponent>(uid).LocalRotation -= component.Increment,
+                Act = () => EntityManager.GetComponent<TransformComponent>(uid).LocalRotation -= component.Increment,
                 Category = VerbCategory.Rotate,
                 Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/rotate_cw.svg.192dpi.png")),
                 Priority = -1,
@@ -115,7 +112,7 @@ namespace Content.Server.Rotatable
             // rotate counter-clockwise
             Verb rotateCCW = new()
             {
-                Act = () => Comp<TransformComponent>(uid).LocalRotation += component.Increment,
+                Act = () => EntityManager.GetComponent<TransformComponent>(uid).LocalRotation += component.Increment,
                 Category = VerbCategory.Rotate,
                 Icon = new SpriteSpecifier.Texture(new("/Textures/Interface/VerbIcons/rotate_ccw.svg.192dpi.png")),
                 Priority = 0,
@@ -129,12 +126,12 @@ namespace Content.Server.Rotatable
         /// </summary>
         public void Flip(EntityUid uid, FlippableComponent component)
         {
-            var oldTransform = Comp<TransformComponent>(uid);
-            var entity = Spawn(component.MirrorEntity, oldTransform.Coordinates);
-            var newTransform = Comp<TransformComponent>(entity);
+            var oldTransform = EntityManager.GetComponent<TransformComponent>(uid);
+            var entity = EntityManager.SpawnEntity(component.MirrorEntity, oldTransform.Coordinates);
+            var newTransform = EntityManager.GetComponent<TransformComponent>(entity);
             newTransform.LocalRotation = oldTransform.LocalRotation;
             _transform.Unanchor(entity, newTransform);
-            Del(uid);
+            EntityManager.DeleteEntity(uid);
         }
 
         public bool HandleRotateObjectClockwise(ICommonSession? playerSession, EntityCoordinates coordinates, EntityUid entity)
@@ -145,13 +142,11 @@ namespace Content.Server.Rotatable
             if (!TryComp<RotatableComponent>(entity, out var rotatableComp))
                 return false;
 
-            if (!_actionBlocker.CanInteract(player, entity)
-                || !_actionBlocker.CanComplexInteract(player)
-                || !_interaction.InRangeAndAccessible(player, entity))
+            if (!_actionBlocker.CanInteract(player, entity) || !_interaction.InRangeAndAccessible(player, entity))
                 return false;
 
             // Check if the object is anchored, and whether we are still allowed to rotate it.
-            if (!rotatableComp.RotateWhileAnchored && TryComp(entity, out PhysicsComponent? physics) &&
+            if (!rotatableComp.RotateWhileAnchored && EntityManager.TryGetComponent(entity, out PhysicsComponent? physics) &&
                 physics.BodyType == BodyType.Static)
             {
                 _popup.PopupEntity(Loc.GetString("rotatable-component-try-rotate-stuck"), entity, player);
@@ -170,13 +165,11 @@ namespace Content.Server.Rotatable
             if (!TryComp<RotatableComponent>(entity, out var rotatableComp))
                 return false;
 
-            if (!_actionBlocker.CanInteract(player, entity)
-                || !_actionBlocker.CanComplexInteract(player)
-                || !_interaction.InRangeAndAccessible(player, entity))
+            if (!_actionBlocker.CanInteract(player, entity) || !_interaction.InRangeAndAccessible(player, entity))
                 return false;
 
             // Check if the object is anchored, and whether we are still allowed to rotate it.
-            if (!rotatableComp.RotateWhileAnchored && TryComp(entity, out PhysicsComponent? physics) &&
+            if (!rotatableComp.RotateWhileAnchored && EntityManager.TryGetComponent(entity, out PhysicsComponent? physics) &&
                 physics.BodyType == BodyType.Static)
             {
                 _popup.PopupEntity(Loc.GetString("rotatable-component-try-rotate-stuck"), entity, player);
@@ -195,13 +188,11 @@ namespace Content.Server.Rotatable
             if (!TryComp<FlippableComponent>(entity, out var flippableComp))
                 return false;
 
-            if (!_actionBlocker.CanInteract(player, entity)
-                || !_actionBlocker.CanComplexInteract(player)
-                || !_interaction.InRangeAndAccessible(player, entity))
+            if (!_actionBlocker.CanInteract(player, entity) || !_interaction.InRangeAndAccessible(player, entity))
                 return false;
 
             // Check if the object is anchored.
-            if (TryComp(entity, out PhysicsComponent? physics) && physics.BodyType == BodyType.Static)
+            if (EntityManager.TryGetComponent(entity, out PhysicsComponent? physics) && physics.BodyType == BodyType.Static)
             {
                 _popup.PopupEntity(Loc.GetString("flippable-component-try-flip-is-stuck"), entity, player);
                 return false;

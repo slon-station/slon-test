@@ -80,7 +80,6 @@
   equipment:
     head: ClothingHeadHatChef
 
-
 # Mask
 - type: loadout
   id: ChefMask
@@ -93,12 +92,10 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitChef
 
-
 - type: loadout
   id: ChefJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtChef
-
 
 # Outer clothing
 - type: loadout

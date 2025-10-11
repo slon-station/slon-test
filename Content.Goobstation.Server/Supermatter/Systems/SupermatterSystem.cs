@@ -410,22 +410,20 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
 
             switch (_delamType)
             {
-                // slon edit - make cascade more common
+                case DelamType.Explosion:
+                default:
+                    loc = "supermatter-delam-explosion";
+                    break;
 
-//                case DelamType.Explosion:
-  //              default:
-    //                loc = "supermatter-delam-explosion";
-      //              break;
+                case DelamType.Singulo:
+                    loc = "supermatter-delam-overmass";
+                    alertLevel = "delta";
+                    break;
 
-//                case DelamType.Singulo:
-  //                  loc = "supermatter-delam-overmass";
-    //                alertLevel = "delta";
-       //             break;
-
-//                case DelamType.Tesla:
-  //                  loc = "supermatter-delam-tesla";
-    //                alertLevel = "delta";
-      //              break;
+                case DelamType.Tesla:
+                    loc = "supermatter-delam-tesla";
+                    alertLevel = "delta";
+                    break;
 
                 case DelamType.Cascade:
                     loc = "supermatter-delam-cascade";
@@ -504,15 +502,15 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
             var moles = mix.TotalMoles;
 
             if (moles >= sm.MolePenaltyThreshold)
-                return DelamType.Cascade; // slon edit - make cascade more common
+                return DelamType.Singulo;
         }
 
         if (sm.Power >= sm.PowerPenaltyThreshold)
-            return DelamType.Cascade; // slon edit - make cascade more common
+            return DelamType.Tesla;
 
         // TODO: add resonance cascade when there's crazy conditions, or a destabilizing crystal :godo:
 
-        return DelamType.Cascade; // slon edit - cascade
+        return DelamType.Explosion;
     }
 
     /// <summary>
@@ -557,7 +555,6 @@ public sealed class SupermatterSystem : SharedSupermatterSystem
 
             case DelamType.Cascade:
                 Spawn(sm.SupermatterKudzuPrototypeId, xform.Coordinates);
-                QueueDel(uid); // slon edit
                 break;
         }
     }

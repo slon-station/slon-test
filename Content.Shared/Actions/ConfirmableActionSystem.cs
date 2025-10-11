@@ -9,7 +9,6 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
-using Content.Shared.Actions.Components;
 using Content.Shared.Actions.Events;
 using Content.Shared.Popups;
 using Robust.Shared.Timing;
@@ -87,7 +86,7 @@ public sealed class ConfirmableActionSystem : EntitySystem
         if (!string.IsNullOrEmpty(comp.Popup))
             _popup.PopupClient(Loc.GetString(comp.Popup), user, user, comp.PopupFontType);
 
-        _actions.SetToggled(ent.Owner, true);
+        _actions.SetToggled(ent, true);
         // Goobstation - Confirmable action with changed icon - End
     }
 
@@ -97,7 +96,7 @@ public sealed class ConfirmableActionSystem : EntitySystem
         comp.NextConfirm = null;
         comp.NextUnprime = null;
 
-        _actions.SetToggled(ent.Owner, false); // Goobstation - Confirmable action with changed icon
+        _actions.SetToggled(ent, false); // Goobstation - Confirmable action with changed icon
 
         Dirty(uid, comp);
     }

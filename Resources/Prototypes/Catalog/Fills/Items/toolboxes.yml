@@ -228,8 +228,6 @@
     - id: Multitool
     - id: ClothingHandsGlovesCombat
     - id: ClothingMaskGasSyndicate
-  - type: StaticPrice
-    price: 1000
 
 - type: entity
   id: ToolboxGoldFilled

@@ -21,6 +21,7 @@ using Content.Shared.Damage;
 using Content.Shared.Damage.Components;
 using Content.Shared.Hands;
 using Content.Shared.Humanoid;
+using Content.Shared.Interaction.Components;
 using Content.Shared.Interaction.Events;
 using Content.Shared.Jittering;
 using Content.Shared.Mobs;
@@ -112,10 +113,10 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         hisGrace.Comp.Holder = args.User;
     }
 
-    private void OnUnequipped(Entity<HisGraceComponent> hisGrace, ref GotUnequippedHandEvent args)
+    private void OnUnequipped(EntityUid uid, HisGraceComponent component, ref GotUnequippedHandEvent args)
     {
-        hisGrace.Comp.IsHeld = false;
-        hisGrace.Comp.Holder = null;
+        component.IsHeld = false;
+        component.Holder = null;
     }
 
     private void OnMeleeHit(Entity<HisGraceComponent> hisGrace, ref MeleeHitEvent args)
@@ -189,8 +190,7 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
             || args.OldState == HisGraceState.Ascended)
             return false;
 
-        SetUnremovable(hisGrace, true);
-
+        EnsureComp<UnremoveableComponent>(hisGrace);
         DoAscension(hisGrace);
         DoAscensionVisuals(hisGrace, "ascended");
         return true;
@@ -450,17 +450,17 @@ public sealed partial class HisGraceSystem : SharedHisGraceSystem
         return (FixedPoint2)(comp.HungerOnDevourMultiplier * criticalThreshold); // solstice try not to cast challenge (impossible)
     }
 
-    private void SetUnremovable(Entity<HisGraceComponent> hisGrace, bool enabled)
+    private void SetUnremovable(EntityUid uid, bool enabled)
     {
         if (enabled)
         {
-            // hisGrace.Comp.PreventDrop = true; - Disabled until someone fixes it :P
-            EnsureComp<JitteringComponent>(hisGrace);
+            EnsureComp<UnremoveableComponent>(uid).DeleteOnDrop = false;
+            EnsureComp<JitteringComponent>(uid);
         }
         else
         {
-            // hisGrace.Comp.PreventDrop = false;
-            RemComp<JitteringComponent>(hisGrace);
+            RemComp<UnremoveableComponent>(uid);
+            RemComp<JitteringComponent>(uid);
         }
     }
 

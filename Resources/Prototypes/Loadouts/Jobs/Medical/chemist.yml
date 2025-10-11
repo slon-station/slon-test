@@ -82,18 +82,15 @@
   equipment:
     jumpsuit: ClothingUniformJumpsuitChemistry
 
-
 - type: loadout
   id: ChemistJumpskirt
   equipment:
     jumpsuit: ClothingUniformJumpskirtChemistry
 
-
 - type: loadout # goob
   id: ChemistMJ
   equipment:
     jumpsuit: ClothingUniformJumpsuitMilitaryChemistry
-
 
 # Back
 - type: loadout
